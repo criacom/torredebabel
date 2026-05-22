@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Torre de Babel — Arquivo Digital</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNiIgZmlsbD0iIzE2MkIxRSIvPjx0ZXh0IHg9IjE2IiB5PSIyNCIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iMjMiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMzREQ2OEMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJhdXRvIj4mI3gzQTg7PC90ZXh0Pjwvc3ZnPg==" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
@@ -742,6 +743,7 @@
       .cover-gallery { gap: 1rem; }
       .cover-card img, .cover-pending { width: 110px; height: 157px; }
       .hero-journal img { width: 160px; }
+      #resgate .credits-grid { grid-template-columns: 1fr !important; }
       #search-input { width: 140px; }
       #search-input:focus { width: 160px; }
       .volume-header { grid-template-columns: 1fr; }
@@ -870,6 +872,219 @@
       white-space: nowrap;
     }
 
+  /* ═══ FEATURED ARTICLES CAROUSEL ═══ */
+  #destaques {
+    background: var(--forest);
+    padding: 5rem 0 4rem;
+    overflow: hidden;
+  }
+  #destaques .section-label {
+    color: rgba(61,214,140,0.55);
+  }
+  #destaques .section-title {
+    color: var(--cream);
+  }
+  .carousel-wrapper {
+    position: relative;
+    margin-top: 2.5rem;
+    overflow: hidden;
+  }
+  .carousel-track {
+    display: flex;
+    gap: 1.5rem;
+  }
+  .featured-card {
+    flex: 0 0 calc(100% - 0px);
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 0;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(61,214,140,0.15);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: opacity 0.5s ease;
+  }
+  @media(max-width:700px) {
+    .featured-card { grid-template-columns: 1fr; }
+  }
+  .featured-card-portrait {
+    position: relative;
+    overflow: hidden;
+    background: #0a1a0f;
+    min-height: 320px;
+  }
+  .featured-card-portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+    opacity: 0.92;
+    filter: saturate(1.1) contrast(1.05);
+  }
+  .featured-card-portrait::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, transparent 60%, var(--forest) 100%);
+    pointer-events: none;
+  }
+  @media(max-width:700px) {
+    .featured-card-portrait { min-height: 220px; }
+    .featured-card-portrait::after {
+      background: linear-gradient(to bottom, transparent 60%, var(--forest) 100%);
+    }
+  }
+  .featured-card-body {
+    padding: 2.5rem 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.25rem;
+  }
+  .featured-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mint);
+    background: rgba(61,214,140,0.1);
+    border: 1px solid rgba(61,214,140,0.25);
+    padding: 0.25rem 0.7rem;
+    border-radius: 2px;
+    width: fit-content;
+  }
+  .featured-badge::before {
+    content: '★';
+    font-size: 0.5rem;
+  }
+  .featured-card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.25rem, 2.8vw, 1.75rem);
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1.2;
+    margin: 0;
+  }
+  .featured-card-author {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--mint);
+    letter-spacing: 0.1em;
+    margin: 0;
+  }
+  .featured-card-institution {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    color: rgba(244,239,228,0.4);
+    letter-spacing: 0.06em;
+    margin: 0;
+  }
+  .featured-card-pull {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+    font-style: italic;
+    color: rgba(244,239,228,0.75);
+    line-height: 1.6;
+    border-left: 2px solid rgba(61,214,140,0.3);
+    padding-left: 1rem;
+    margin: 0;
+  }
+  .featured-card-abstract {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.9rem;
+    color: rgba(244,239,228,0.55);
+    line-height: 1.65;
+    margin: 0;
+  }
+  .featured-card-keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0;
+  }
+  .featured-card-keywords span {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.08em;
+    color: rgba(61,214,140,0.6);
+    border: 1px solid rgba(61,214,140,0.2);
+    padding: 0.2rem 0.55rem;
+    border-radius: 2px;
+    text-transform: uppercase;
+  }
+  .featured-card-footer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(61,214,140,0.1);
+  }
+  .featured-cite {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.5rem;
+    color: rgba(244,239,228,0.3);
+    letter-spacing: 0.04em;
+    flex: 1;
+    min-width: 160px;
+  }
+  .carousel-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+  }
+  .carousel-dots {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .carousel-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(61,214,140,0.25);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.25s, transform 0.25s;
+  }
+  .carousel-dot.active {
+    background: var(--mint);
+    transform: scale(1.4);
+  }
+  .carousel-arrows {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .carousel-arrow {
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(61,214,140,0.25);
+    background: rgba(61,214,140,0.05);
+    color: var(--mint);
+    border-radius: 2px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .carousel-arrow:hover {
+    background: rgba(61,214,140,0.12);
+    border-color: rgba(61,214,140,0.5);
+  }
+  .carousel-arrow:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
   </style>
 </head>
 <body>
@@ -883,6 +1098,7 @@
   <div class="nav-right">
     <nav class="nav-links">
       <a href="#sobre">Sobre</a>
+      <a href="#destaques">Destaques</a>
       <a href="#volumes">Volumes</a>
       <a href="#equipe">Equipe</a>
       <a href="#resgate">Resgate</a>
@@ -898,10 +1114,10 @@
 <!-- ═══ HERO ═══ -->
 <section class="hero" id="inicio">
   <div class="hero-left">
-    <div class="hero-label">Arquivo Digital — Resgate de Lost Media</div>
+    <div class="hero-label">Arquivo Digital</div>
     <div class="lost-media-badge">
       <span class="dot"></span>
-      Digitalizado em 2025 — acesso aberto pela primeira vez
+      Digitalizado em 2026 — acesso aberto pela primeira vez
     </div>
     <h1 class="hero-title">Torre<br/><span>de</span><br/>Babel</h1>
     <p class="hero-subtitle">Reflexões e Pesquisa em Psicologia — o periódico científico da Análise do Comportamento do Sul do Brasil, existente apenas em edição física de 1994 a 1998, agora disponível digitalmente pela primeira vez.</p>
@@ -915,12 +1131,12 @@
         <dd>1994 – 1998</dd>
       </div>
       <div class="hero-meta-item">
-        <dt>ISSN</dt>
-        <dd>1414-0551</dd>
+        <dt>Volumes</dt>
+        <dd>5 vols · 6 números</dd>
       </div>
       <div class="hero-meta-item">
-        <dt>Área</dt>
-        <dd>Análise do Comportamento</dd>
+        <dt>ISSN</dt>
+        <dd>1414-0551</dd>
       </div>
     </dl>
     <div class="hero-cta">
@@ -948,22 +1164,22 @@
 <section id="sobre">
   <div class="container">
     <div class="section-label">O que é este arquivo</div>
-    <h2 class="section-title">Uma revista que quase<br/>desapareceu da história</h2>
+    <h2 class="section-title">Um pedaço de história</h2>
     <div class="manifesto-grid">
       <div class="manifesto-left">
         <div class="manifesto-psi">Ψ</div>
         <div class="manifesto-stats">
           <div class="stat-item">
-            <div class="stat-num">4+</div>
-            <div class="stat-label">Volumes publicados (1994–1998)</div>
+            <div class="stat-num">5</div>
+            <div class="stat-label">Volumes · 6 números (1994–1998)</div>
           </div>
           <div class="stat-item">
-            <div class="stat-num">~30</div>
-            <div class="stat-label">Artigos científicos originais</div>
+            <div class="stat-num">828</div>
+            <div class="stat-label">Páginas catalogadas · Vol. 4 e 5 com 340+142 p.</div>
           </div>
           <div class="stat-item">
             <div class="stat-num">0</div>
-            <div class="stat-label">Edições digitais disponíveis — até agora</div>
+            <div class="stat-label">Edições digitais disponíveis antes deste arquivo</div>
           </div>
         </div>
       </div>
@@ -988,20 +1204,368 @@
   </div>
 </div>
 
+<!-- ═══ ARTIGOS EM DESTAQUE ═══ -->
+<section id="destaques">
+  <div class="container">
+    <div class="section-label">Leituras Recomendadas</div>
+    <h2 class="section-title">Artigos em Destaque</h2>
+
+    <div class="carousel-wrapper">
+      <div class="carousel-track" id="carousel-track">
+
+        <!-- ── Card 1 — César Ades (Vol.3, 1996) ── -->
+        <div class="featured-card" id="feat-0">
+          <div class="featured-card-portrait">
+            <img src="img/cesarades.png"
+                 alt="César Ades — Departamento de Psicologia Experimental, USP" />
+          </div>
+          <div class="featured-card-body">
+            <div>
+              <div style="display:flex; gap:0.5rem; flex-wrap:wrap; align-items:center;">
+                <p class="featured-badge">Artigo em Destaque</p>
+                <p class="featured-badge" style="background:rgba(244,239,228,0.06); border-color:rgba(244,239,228,0.15); color:rgba(244,239,228,0.5);">
+                  Inédito online · disponível pela 1ª vez
+                </p>
+              </div>
+              <h3 class="featured-card-title" style="margin-top:0.85rem;">
+                De que Trata a Emoção
+              </h3>
+              <p class="featured-card-author" style="margin-top:0.6rem;">César Ades</p>
+              <p class="featured-card-institution">
+                Depto. de Psicologia Experimental — Instituto de Psicologia, USP · São Paulo
+              </p>
+            </div>
+
+            <p class="featured-card-pull">
+              "A emoção ocorre sem que a tenhamos chamado; apresenta-se à consciência como um fenômeno imediato e concreto, que carrega seu próprio sentido."
+            </p>
+
+            <p class="featured-card-abstract">
+              Por quase três décadas, este artigo existiu apenas em papel — distribuído em poucos exemplares físicos da revista. Texto didático fundamental do Prof. César Ades, formou gerações de estudantes de psicologia na USP e em todo o Brasil. Aqui, sua memória em forma de texto continua viva: os processos que compõem a emoção, o papel dos fenômenos afetivos na interação social e as principais teorias da experiência emocional — do feedback facial à avaliação cognitiva — acessíveis agora a qualquer pesquisador do mundo.
+            </p>
+
+            <div class="featured-card-keywords">
+              <span>Emoção</span>
+              <span>Experiência emocional</span>
+              <span>Teorias sobre emoção</span>
+              <span>Feedback facial</span>
+              <span>Avaliação cognitiva</span>
+            </div>
+
+            <div class="featured-card-footer">
+              <p class="featured-cite">
+                ADES, César. De que Trata a Emoção.<br/>
+                <em>Torre Babel</em>, Londrina, v.3, p.7–26, set. 1996.
+              </p>
+              <a href="artigos/Vol3/02.pdf" class="pdf-btn" target="_blank" rel="noopener"
+                 style="background:rgba(61,214,140,0.12); color:var(--mint); border-color:rgba(61,214,140,0.3);">
+                <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+                Ler artigo
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Card 2 — Verônica Bender Haydu (Vol.5, 1998) ── -->
+        <div class="featured-card" id="feat-1">
+          <div class="featured-card-portrait">
+            <img src="img/veronica.png"
+                 alt="Profa. Dra. Verônica Bender Haydu — UEL" />
+          </div>
+          <div class="featured-card-body">
+            <div>
+              <div style="display:flex; gap:0.5rem; flex-wrap:wrap; align-items:center;">
+                <p class="featured-badge">Artigo em Destaque</p>
+                <p class="featured-badge" style="background:rgba(61,214,140,0.06); border-color:rgba(61,214,140,0.2); color:rgba(61,214,140,0.7);">
+                  Último artigo publicado na revista
+                </p>
+              </div>
+              <h3 class="featured-card-title" style="margin-top:0.85rem;">
+                Relações de Equivalência e a Recordação de Nomes
+              </h3>
+              <p class="featured-card-author" style="margin-top:0.6rem;">Verônica Bender Haydu · Ana Claudia Sella Paranzini · Juliana Rodrigues Tini · Paula Orchiucci Miura</p>
+              <p class="featured-card-institution">
+                Universidade Estadual de Londrina · Editor Científico — Torre de Babel v.1–5 (1994–1998)
+              </p>
+            </div>
+
+            <p class="featured-card-pull">
+              Redes relacionais envolvendo nomes de pessoas conhecidas e desconhecidas — uma fronteira da análise do comportamento que ainda hoje orienta pesquisas em equivalência de estímulos.
+            </p>
+
+            <p class="featured-card-abstract">
+              Profa. Dra. Verônica Bender Haydu foi a principal força editorial da Torre de Babel desde seu primeiro número — coordenadora, depois Editor Científico, e colaboradora em múltiplos artigos de dados empíricos ao longo dos cinco volumes. Neste trabalho pioneiro, publicado no último número da revista em 1998, Haydu e colaboradoras exploram as redes relacionais formadas por equivalência de estímulos, antecipando uma linha de pesquisa que viria a se consolidar como área central da análise do comportamento brasileira. Com os dados empíricos desta e de outras pesquisas da revista agora acessíveis online pela primeira vez, abre-se uma janela inédita para quem estuda a produção científica deste campo em sua fase formativa.
+            </p>
+
+            <div class="featured-card-keywords">
+              <span>Equivalência de estímulos</span>
+              <span>Recordação de nomes</span>
+              <span>Redes relacionais</span>
+              <span>Análise do Comportamento</span>
+              <span>Memória</span>
+            </div>
+
+            <div class="featured-card-footer">
+              <p class="featured-cite">
+                HAYDU, V. B. et al. Relações de Equivalência e a Recordação de Nomes.<br/>
+                <em>Torre Babel</em>, Londrina, v.5, n.1/2, p.111–138, set. 1998.
+              </p>
+              <a href="artigos/Vol5/06.pdf" class="pdf-btn" target="_blank" rel="noopener"
+                 style="background:rgba(61,214,140,0.12); color:var(--mint); border-color:rgba(61,214,140,0.3);">
+                <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+                Ler artigo
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Card 3 — Roberto Alves Banaco (Vol.3, 1996) ── -->
+        <div class="featured-card" id="feat-2">
+          <div class="featured-card-portrait">
+            <img src="img/banaco.png"
+                 alt="Prof. Dr. Roberto Alves Banaco — PUC-SP" />
+          </div>
+          <div class="featured-card-body">
+            <div>
+              <div style="display:flex; gap:0.5rem; flex-wrap:wrap; align-items:center;">
+                <p class="featured-badge">Artigo em Destaque</p>
+                <p class="featured-badge" style="background:rgba(61,214,140,0.06); border-color:rgba(61,214,140,0.2); color:rgba(61,214,140,0.7);">
+                  Documento histórico da psicoterapia brasileira
+                </p>
+              </div>
+              <h3 class="featured-card-title" style="margin-top:0.85rem;">
+                O Desenvolvimento Pessoal do Terapeuta: Análises Informais de um Formador em Psicoterapia
+              </h3>
+              <p class="featured-card-author" style="margin-top:0.6rem;">Roberto Alves Banaco</p>
+              <p class="featured-card-institution">
+                Faculdade de Psicologia — Pontifícia Universidade Católica de São Paulo (PUC-SP)
+              </p>
+            </div>
+
+            <p class="featured-card-pull">
+              Um relato em primeira pessoa sobre o que forma um terapeuta — os bastidores da clínica comportamental vistos por dentro, na voz de quem ajudou a construí-la no Brasil.
+            </p>
+
+            <p class="featured-card-abstract">
+              Roberto Alves Banaco é um dos mais influentes terapeutas comportamentais do Brasil. Este artigo, publicado em 1996, é um documento raro: um relato informal e autobiográfico sobre sua própria formação como formador em psicoterapia. Em vez de um texto técnico convencional, Banaco oferece uma janela privilegiada para o desenvolvimento pessoal do terapeuta — os desafios, os aprendizados, as dúvidas e as convicções que moldam quem forma outros clínicos. Para estudiosos da história da psicoterapia comportamental no Brasil e da trajetória intelectual de Banaco, este texto é uma fonte primária insubstituível. Permaneceu restrito a poucos exemplares físicos por décadas; disponível aqui pela primeira vez em acesso aberto.
+            </p>
+
+            <div class="featured-card-keywords">
+              <span>Formação do terapeuta</span>
+              <span>Psicoterapia comportamental</span>
+              <span>Desenvolvimento pessoal</span>
+              <span>Análise clínica do comportamento</span>
+            </div>
+
+            <div class="featured-card-footer">
+              <p class="featured-cite">
+                BANACO, Roberto Alves. O Desenvolvimento Pessoal do Terapeuta.<br/>
+                <em>Torre Babel</em>, Londrina, v.3, p.27–41, set. 1996.
+              </p>
+              <a href="artigos/Vol3/03.pdf" class="pdf-btn" target="_blank" rel="noopener"
+                 style="background:rgba(61,214,140,0.12); color:var(--mint); border-color:rgba(61,214,140,0.3);">
+                <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+                Ler artigo
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Card 4 — José Lino Oliveira Bueno (Vol.3, 1996) ── -->
+        <div class="featured-card" id="feat-3">
+          <div class="featured-card-portrait">
+            <img src="img/joselino.png"
+                 alt="Prof. Dr. José Lino Oliveira Bueno — USP Ribeirão Preto" />
+          </div>
+          <div class="featured-card-body">
+            <div>
+              <div style="display:flex; gap:0.5rem; flex-wrap:wrap; align-items:center;">
+                <p class="featured-badge">Artigo em Destaque</p>
+                <p class="featured-badge" style="background:rgba(244,239,228,0.06); border-color:rgba(244,239,228,0.15); color:rgba(244,239,228,0.5);">
+                  Texto didático · ainda atual
+                </p>
+              </div>
+              <h3 class="featured-card-title" style="margin-top:0.85rem;">
+                Fatores Temporais no Condicionamento Clássico
+              </h3>
+              <p class="featured-card-author" style="margin-top:0.6rem;">José Lino Oliveira Bueno</p>
+              <p class="featured-card-institution">
+                Livre-Docente — Universidade de São Paulo · Ribeirão Preto
+              </p>
+            </div>
+
+            <p class="featured-card-pull">
+              "O tempo, fator onipresente no comportamento, raramente recebe o tratamento sistemático que merece — este artigo é uma das raras exceções na literatura em língua portuguesa."
+            </p>
+
+            <p class="featured-card-abstract">
+              Em dez páginas precisas, o Prof. José Lino Oliveira Bueno apresenta um panorama rigoroso e acessível dos fatores temporais no condicionamento clássico — tocando nas contribuições de Staddon e Rescorla, dois dos pesquisadores mais influentes do estudo do comportamento respondente. O texto enfrenta de frente tópicos que até hoje são raramente abordados com esta clareza na literatura didática brasileira: a relação entre o intervalo CS-US, a contingência, a contiguidade e os modelos computacionais do condicionamento. Didático sem ser superficial, o artigo permanece atual como introdução ao tema e como convite ao aprofundamento. Disponível agora em acesso aberto pela primeira vez.
+            </p>
+
+            <div class="featured-card-keywords">
+              <span>Condicionamento clássico</span>
+              <span>Fatores temporais</span>
+              <span>Staddon</span>
+              <span>Rescorla</span>
+              <span>Comportamento respondente</span>
+              <span>CS-US</span>
+            </div>
+
+            <div class="featured-card-footer">
+              <p class="featured-cite">
+                BUENO, José Lino Oliveira. Fatores Temporais no Condicionamento Clássico.<br/>
+                <em>Torre Babel</em>, Londrina, v.3, p.43–52, set. 1996.
+              </p>
+              <a href="artigos/Vol3/04.pdf" class="pdf-btn" target="_blank" rel="noopener"
+                 style="background:rgba(61,214,140,0.12); color:var(--mint); border-color:rgba(61,214,140,0.3);">
+                <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+                Ler artigo
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Card 5 — Carlos Eduardo Costa (Vol.1, 1994) ── -->
+        <div class="featured-card" id="feat-4">
+          <div class="featured-card-portrait">
+            <img src="img/cae.png"
+                 alt="Prof. Dr. Carlos Eduardo Costa — UEL" />
+          </div>
+          <div class="featured-card-body">
+            <div>
+              <div style="display:flex; gap:0.5rem; flex-wrap:wrap; align-items:center;">
+                <p class="featured-badge">Artigo em Destaque</p>
+                <p class="featured-badge" style="background:rgba(61,214,140,0.06); border-color:rgba(61,214,140,0.2); color:rgba(61,214,140,0.7);">
+                  Leitura essencial · primeiro volume
+                </p>
+              </div>
+              <h3 class="featured-card-title" style="margin-top:0.85rem;">
+                Por que Estudar o Comportamento Animal em Psicologia?
+              </h3>
+              <p class="featured-card-author" style="margin-top:0.6rem;">Carlos Eduardo Costa</p>
+              <p class="featured-card-institution">
+                Universidade Estadual de Londrina · Depto. de Psicologia Geral e Análise do Comportamento
+              </p>
+            </div>
+
+            <p class="featured-card-pull">
+              Uma pergunta simples que abre uma discussão profunda — e que qualquer estudante de psicologia deveria enfrentar antes de decidir o que estudar.
+            </p>
+
+            <p class="featured-card-abstract">
+              O Prof. Carlos Eduardo Costa é um dos pesquisadores mais prolíficos desta revista, com contribuições em múltiplos volumes abrangendo análise clínica, raciocínio, resolução de problemas e comportamento animal. Este artigo, publicado já no primeiro volume da Torre de Babel em 1994, é o mais duradouro: uma defesa sensível e bem fundamentada do estudo do comportamento animal como parte indispensável da formação em psicologia. O texto enfrenta o preconceito histórico contra a pesquisa básica com animais na psicologia aplicada, argumenta com clareza sobre o papel da pesquisa translacional e convida o leitor a pensar o método antes de escolher o objeto. Atual, necessário — e escrito com uma clareza rara para um tema frequentemente mal compreendido.
+            </p>
+
+            <div class="featured-card-keywords">
+              <span>Comportamento animal</span>
+              <span>Pesquisa básica</span>
+              <span>Análise do Comportamento</span>
+              <span>Psicologia experimental</span>
+              <span>Pesquisa translacional</span>
+            </div>
+
+            <div class="featured-card-footer">
+              <p class="featured-cite">
+                COSTA, Carlos Eduardo. Por que Estudar o Comportamento Animal em Psicologia?<br/>
+                <em>Torre Babel</em>, Londrina, v.1, p.24–29, 1994.
+              </p>
+              <a href="artigos/Vol1/05.pdf" class="pdf-btn" target="_blank" rel="noopener"
+                 style="background:rgba(61,214,140,0.12); color:var(--mint); border-color:rgba(61,214,140,0.3);">
+                <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+                Ler artigo
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Card 6 — Lígia Maria de Castro Marcondes Machado (Vol.1, 1994) ── -->
+        <div class="featured-card" id="feat-5">
+          <div class="featured-card-portrait">
+            <img src="img/ligiamachado.png"
+                 alt="Profa. Dra. Lígia Maria de Castro Marcondes Machado — USP" />
+          </div>
+          <div class="featured-card-body">
+            <div>
+              <div style="display:flex; gap:0.5rem; flex-wrap:wrap; align-items:center;">
+                <p class="featured-badge">Artigo em Destaque</p>
+                <p class="featured-badge" style="background:rgba(61,214,140,0.06); border-color:rgba(61,214,140,0.2); color:rgba(61,214,140,0.7);">
+                  Teoria · primeiro volume
+                </p>
+              </div>
+              <h3 class="featured-card-title" style="margin-top:0.85rem;">
+                Behaviorismo Radical: Uma Visão do Homem Integral
+              </h3>
+              <p class="featured-card-author" style="margin-top:0.6rem;">Lígia Maria de Castro Marcondes Machado</p>
+              <p class="featured-card-institution">
+                Instituto de Psicologia — Universidade de São Paulo · São Paulo
+              </p>
+            </div>
+
+            <p class="featured-card-pull">
+              "Como fruto da seleção ontogenética, cada organismo se torna único, torna-se pessoa porque adquire um repertório de comportamento que depende de sua história de vida particular; como membro de uma cultura, cada pessoa pode atuar sobre o acaso que caracteriza a variação e a seleção nos dois primeiros níveis, porque pode planejar sua própria cultura."
+            </p>
+
+            <p class="featured-card-abstract">
+              Publicado no primeiro número da Torre de Babel em 1994, este artigo da Profa. Lígia Machado — membro do conselho editorial da revista e pesquisadora do IPUSP — oferece uma das apresentações mais claras e abrangentes do behaviorismo radical como filosofia do homem integral. Articulando filogênese, ontogênese e cultura como os três níveis que constroem o indivíduo, o texto vai além do estereótipo mecanicista frequentemente atribuído ao behaviorismo e revela sua dimensão filosófica mais profunda: o ser humano como produto e produtor de sua própria história. Uma leitura indispensável para quem quer entender o que o behaviorismo radical diz — e o que ele não diz — sobre a natureza humana.
+            </p>
+
+            <div class="featured-card-keywords">
+              <span>Behaviorismo Radical</span>
+              <span>Filogênese</span>
+              <span>Ontogênese</span>
+              <span>Cultura</span>
+              <span>Seleção por consequências</span>
+              <span>Skinner</span>
+            </div>
+
+            <div class="featured-card-footer">
+              <p class="featured-cite">
+                MACHADO, Lígia Maria de Castro Marcondes. Behaviorismo Radical: Uma Visão do Homem Integral.<br/>
+                <em>Torre Babel</em>, Londrina, v.1, p.11–19, 1994.
+              </p>
+              <a href="artigos/Vol1/03.pdf" class="pdf-btn" target="_blank" rel="noopener"
+                 style="background:rgba(61,214,140,0.12); color:var(--mint); border-color:rgba(61,214,140,0.3);">
+                <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+                Ler artigo
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /carousel-track -->
+
+      <div class="carousel-nav">
+        <div class="carousel-dots" id="carousel-dots">
+          <button class="carousel-dot active" onclick="goToSlide(0)" aria-label="César Ades — De que Trata a Emoção"></button>
+          <button class="carousel-dot" onclick="goToSlide(1)" aria-label="Verônica Bender Haydu — Relações de Equivalência"></button>
+          <button class="carousel-dot" onclick="goToSlide(2)" aria-label="Roberto Alves Banaco — O Desenvolvimento Pessoal do Terapeuta"></button>
+          <button class="carousel-dot" onclick="goToSlide(3)" aria-label="José Lino Oliveira Bueno — Fatores Temporais no Condicionamento Clássico"></button>
+          <button class="carousel-dot" onclick="goToSlide(4)" aria-label="Carlos Eduardo Costa — Por que Estudar o Comportamento Animal em Psicologia?"></button>
+          <button class="carousel-dot" onclick="goToSlide(5)" aria-label="Lígia Machado — Behaviorismo Radical: Uma Visão do Homem Integral"></button>
+        </div>
+        <div class="carousel-arrows">
+          <button class="carousel-arrow" id="carousel-prev" onclick="prevSlide()" disabled aria-label="Anterior">&#8592;</button>
+          <button class="carousel-arrow" id="carousel-next" onclick="nextSlide()" aria-label="Próximo">&#8594;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══ VOLUMES ═══ -->
 <section id="volumes">
   <div class="container">
     <div class="section-label">Acervo Completo</div>
     <h2 class="section-title">Volumes e Artigos</h2>
-    <p style="margin-top:0.75rem; font-size:1.05rem; color:var(--muted); max-width:58ch;">
-      Clique em <strong style="color:var(--forest)">↓ PDF</strong> para baixar o artigo individual. Cada arquivo é um PDF digitalizado inédito.
+    <p style="margin-top:0.75rem; font-size:1.05rem; color:var(--muted); max-width:62ch;">
+      Selecione uma capa abaixo para explorar os artigos daquele volume. Clique em <strong style="color:var(--body);">↓ PDF</strong> para abrir o artigo individual.
     </p>
 
     <!-- ─── COVER GALLERY ─── -->
     <div class="cover-gallery" id="cover-gallery">
 
-      <!-- Vol 1 — active by default -->
-      <div class="cover-card active" id="cover-1" onclick="switchVol(1, this)">
+      <!-- Vol 1 -->
+      <div class="cover-card" id="cover-1" onclick="switchVol(1, this)">
         <img src="img/capa1.jpg" alt="Torre de Babel — Volume 1, 1994" />
         <div class="cover-arrow"></div>
         <p class="cover-label">Vol. 1 · 1994</p>
@@ -1021,33 +1585,32 @@
         <p class="cover-label">Vol. 3 · 1996</p>
       </div>
 
-      <!-- Vol 4 — placeholder -->
-      <div class="cover-card cover-card--pending" id="cover-4" title="Capa em breve">
-        <div class="cover-pending">
-          <span class="psi-wm">Ψ</span>
-          <span class="cover-vol-ref">Vol. 4</span>
-          <span class="cover-pending-badge">Em breve</span>
-        </div>
-        <div class="cover-arrow" style="opacity:0;"></div>
-        <p class="cover-label">Vol. 4 · 1997</p>
+      <!-- Vol 4, n.1 — Mar. 1997 -->
+      <div class="cover-card" id="cover-4-1" onclick="switchVol(4, this)">
+        <img src="img/capa4_1.jpg" alt="Torre de Babel — Volume 4, n.1, Mar. 1997" />
+        <div class="cover-arrow"></div>
+        <p class="cover-label">Vol. 4, n.1 · Mar. 1997</p>
       </div>
 
-      <!-- Vol 5 — placeholder -->
-      <div class="cover-card cover-card--pending" id="cover-5" title="Capa em breve">
-        <div class="cover-pending">
-          <span class="psi-wm">Ψ</span>
-          <span class="cover-vol-ref">Vol. 5</span>
-          <span class="cover-pending-badge">Em breve</span>
-        </div>
-        <div class="cover-arrow" style="opacity:0;"></div>
-        <p class="cover-label">Vol. 5 · 1998</p>
+      <!-- Vol 4, n.2 — Set. 1997 -->
+      <div class="cover-card" id="cover-4-2" onclick="switchVol(4, this)">
+        <img src="img/capa4_2.jpg" alt="Torre de Babel — Volume 4, n.2, Set. 1997" />
+        <div class="cover-arrow"></div>
+        <p class="cover-label">Vol. 4, n.2 · Set. 1997</p>
+      </div>
+
+      <!-- Vol 5, n.1/2 — Set. 1998 -->
+      <div class="cover-card" id="cover-5" onclick="switchVol(5, this)">
+        <img src="img/capa5_1.jpg" alt="Torre de Babel — Volume 5, n.1/2, Set. 1998" />
+        <div class="cover-arrow"></div>
+        <p class="cover-label">Vol. 5, n.1/2 · Set. 1998</p>
       </div>
 
     </div>
     <!-- ────────────────── -->
 
     <!-- ─ VOL 1 ─ -->
-    <div id="vol-1" class="volume-panel active">
+    <div id="vol-1" class="volume-panel">
       <div class="volume-header">
         <div class="volume-cover-placeholder vol1-cover">
           <div class="vol1-cover-inner">
@@ -1437,34 +2000,33 @@
     <!-- ─ VOL 2 ─ -->
     <div id="vol-2" class="volume-panel">
       <div class="volume-header">
-        <div class="volume-cover-placeholder vol2-cover">
-          <div class="vol2-cover-inner">
-            <div class="title-big">TORRE<br/>DE BABEL</div>
-            <div class="psi-bg">Ψ</div>
-            <div class="vol-info"><span>VOLUME 2</span><span>SET. 1995</span></div>
-          </div>
+        <div style="flex-shrink:0;">
+          <img src="img/capa2.jpg" alt="Torre de Babel — Volume 2, Set. 1995"
+               style="width:130px; height:auto; display:block; box-shadow:3px 5px 16px rgba(20,18,14,0.22);" />
         </div>
         <div class="volume-info">
           <h3>Volume 2 — Setembro 1995</h3>
-          <p class="volume-byline">Torre de Babel: Refl.Pesq.Psic. · v.2 · p.7–113 · Set. 1995 · Londrina, PR · Editora UEL</p>
-          <p>Com o segundo volume, a revista muda de subtítulo para <em>Reflexões e Pesquisa em Psicologia</em>, ampliando seu escopo para além da Análise do Comportamento e tornando-se uma publicação de circulação nacional. A capa verde vibrante com o símbolo Ψ marca esta nova fase. O volume inclui 8 artigos originais abrangendo análise do comportamento, educação especial, riscos ambientais e processamento de informação.</p>
+          <p class="volume-byline">Torre de Babel: Refl.Pesq.Psicol. · v.2 · p.7–113 · Set. 1995 · Londrina, PR · Editora UEL</p>
+          <p>Com o segundo volume a revista amplia seu subtítulo para <em>Reflexões e Pesquisa em Psicologia</em>, tornando-se veículo de circulação nacional. Inclui 8 artigos originais abrangendo análise do comportamento, educação especial, riscos ambientais e processamento de informação (sistema NOMOS). Publicação anual do Departamento de Psicologia Geral e Análise do Comportamento — UEL.</p>
           <div class="volume-tags">
-            <span class="tag">Análise do Comportamento Aplicada</span>
+            <span class="tag">Análise do Comportamento</span>
             <span class="tag">Educação Especial</span>
             <span class="tag">Riscos Ambientais</span>
-            <span class="tag">NOMOS V3</span>
-            <span class="tag">Relações Funcionais</span>
+            <span class="tag">NOMOS V3 / V31</span>
+            <span class="tag">Relação Funcional</span>
+            <span class="tag">Edução de Regras</span>
           </div>
         </div>
       </div>
 
       <div class="editorial-item">
-        <p class="articles-section-label" style="border:none; padding:0; margin-bottom:0.35rem;">Editorial</p>
+        <p class="articles-section-label" style="border:none; padding:0; margin-bottom:0.35rem;">Editorial + Sumário</p>
         <p class="article-title">Editorial — Volume 2</p>
         <p class="article-authors">Verônica Bender Haydu · Dione de Rezende</p>
-        <div style="margin-top:0.75rem; display:flex; gap:0.75rem; align-items:center;">
-          <span class="page-badge">p. 5</span>
-          <a href="pdfs/v2/00_editorial_haydu_rezende_1995.pdf" class="pdf-btn" target="_blank" rel="noopener">
+        <p class="article-institution">Depto. de Psicologia Geral e Análise do Comportamento — UEL</p>
+        <div style="margin-top:0.75rem; display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap;">
+          <span class="page-badge">p. 5 · arquivo: 01.pdf</span>
+          <a href="artigos/Vol2/01.pdf" class="pdf-btn" target="_blank" rel="noopener">
             <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
             PDF
           </a>
@@ -1474,7 +2036,7 @@
       <p class="articles-section-label" style="margin-top:1.5rem;">Artigos</p>
       <div class="article-list" id="list-vol-2">
 
-        <div class="article-item" data-searchable="Riscos Ambientais Criança Reflexões Proposta Intervenção Preventiva Famílias Maria Aparecida Trevisan Zamberlan Renata Grossi Cynthia Borges Moura Elias Lima Áurea Ota Vanessa Tomaz Márcio Pinheiro Gislaine Andrade Maristela Boldo UEL">
+        <div class="article-item" data-searchable="Riscos Ambientais Criança reflexões proposta intervenção preventiva famílias Maria Aparecida Trevisan Zamberlan Renata Grossi Cynthia Borges Moura Elias Carmo Lima Áurea Emi Ota Vanessa Alessandra Tomaz Márcio Aparecido Pinheiro Gislaine Aparecida Andrade Maristela Aparecida Boldo UEL">
           <span class="article-num">01</span>
           <div class="article-body">
             <p class="article-title">Riscos Ambientais à Criança: reflexões para a proposta de intervenção preventiva junto a famílias</p>
@@ -1482,8 +2044,8 @@
             <p class="article-institution">Universidade Estadual de Londrina</p>
           </div>
           <div class="article-meta">
-            <span class="page-badge">p. 7–30</span>
-            <a href="pdfs/v2/01_zamberlan_et_al_1995_riscos_ambientais_crianca.pdf" class="pdf-btn" target="_blank" rel="noopener">
+            <span class="page-badge">p. 7–30 · 02.pdf</span>
+            <a href="artigos/Vol2/02.pdf" class="pdf-btn" target="_blank" rel="noopener">
               <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
               PDF
             </a>
@@ -1498,15 +2060,15 @@
             <p class="article-institution">Universidade Estadual de Londrina</p>
           </div>
           <div class="article-meta">
-            <span class="page-badge">p. 31–34</span>
-            <a href="pdfs/v2/02_silveira_santanna_1995_relacao_funcional_explicacao.pdf" class="pdf-btn" target="_blank" rel="noopener">
+            <span class="page-badge">p. 31–34 · 03.pdf</span>
+            <a href="artigos/Vol2/03.pdf" class="pdf-btn" target="_blank" rel="noopener">
               <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
               PDF
             </a>
           </div>
         </div>
 
-        <div class="article-item" data-searchable="Reflexões Análise Experimental Comportamento AEC Análise Comportamento Aplicada Clínica Carlos Eduardo Costa UEL">
+        <div class="article-item" data-searchable="Reflexões Análise Experimental Comportamento AEC Análise Comportamento Aplicada Clínica ACA Carlos Eduardo Costa UEL">
           <span class="article-num">03</span>
           <div class="article-body">
             <p class="article-title">Reflexões sobre a Análise Experimental do Comportamento e Análise do Comportamento Aplicada à Clínica</p>
@@ -1514,15 +2076,15 @@
             <p class="article-institution">Universidade Estadual de Londrina</p>
           </div>
           <div class="article-meta">
-            <span class="page-badge">p. 35–40</span>
-            <a href="pdfs/v2/03_costa_1995_aec_aca_clinica.pdf" class="pdf-btn" target="_blank" rel="noopener">
+            <span class="page-badge">p. 35–40 · 04.pdf</span>
+            <a href="artigos/Vol2/04.pdf" class="pdf-btn" target="_blank" rel="noopener">
               <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
               PDF
             </a>
           </div>
         </div>
 
-        <div class="article-item" data-searchable="Educação Especial Reflexão Normalização Integração Pessoa Portadora Necessidades Educacionais Especiais PPNEE Renata Grossi UEL">
+        <div class="article-item" data-searchable="Educação Especial reflexão processo normalização integração pessoa portadora necessidades educacionais especiais PPNEE Renata Grossi UEL">
           <span class="article-num">04</span>
           <div class="article-body">
             <p class="article-title">Educação Especial: uma reflexão sobre o processo de normalização e de integração da pessoa portadora de necessidades educacionais especiais (PPNEE)</p>
@@ -1530,40 +2092,40 @@
             <p class="article-institution">Universidade Estadual de Londrina</p>
           </div>
           <div class="article-meta">
-            <span class="page-badge">p. 41–46</span>
-            <a href="pdfs/v2/04_grossi_1995_educacao_especial_normalizacao.pdf" class="pdf-btn" target="_blank" rel="noopener">
+            <span class="page-badge">p. 41–46 · 05.pdf</span>
+            <a href="artigos/Vol2/05.pdf" class="pdf-btn" target="_blank" rel="noopener">
               <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
               PDF
             </a>
           </div>
         </div>
 
-        <div class="article-item" data-searchable="Resolução Problemas NOMOS V31 efeito grau dificuldade educação regras learning set desempenho subsequente Fernando César Capovilla Verônica Bender Haydu Carlos Eduardo Costa Josiane Cecília Luzia Marcia Pires Andrade Luciana Siqueira Silva Elizeu Macedo Marcelo Duduchi Alessandra Seabra Capovilla USP São Paulo UEL">
+        <div class="article-item" data-searchable="Resolução Problemas NOMOS V31 efeito grau dificuldade edução regras learning set desempenho subsequente Fernando César Capovilla USP Verônica Bender Haydu Carlos Eduardo Costa Josiane Cecília Luzia Marcia Pires Andrade Luciana Siqueira Silva UEL Elizeu Macedo Marcelo Duduchi Alessandra Seabra Capovilla USP São Paulo">
           <span class="article-num">05</span>
           <div class="article-body">
-            <p class="article-title">Resolução de Problemas em NOMOS V31: efeito do grau de dificuldade de educação de regras durante o <em>learning set</em> sobre o desempenho subsequente</p>
+            <p class="article-title">Resolução de Problemas em NOMOS V31: efeito do grau de dificuldade de edução de regras durante o <em>learning set</em> sobre o desempenho subsequente</p>
             <p class="article-authors">Fernando César Capovilla · Verônica Bender Haydu · Carlos Eduardo Costa · Josiane Cecília Luzia · Marcia Pires de Andrade · Luciana Siqueira da Silva · Elizeu C. Macedo · Marcelo Duduchi · Alessandra G. Seabra Capovilla</p>
             <p class="article-institution">Universidade de São Paulo · Universidade Estadual de Londrina</p>
           </div>
           <div class="article-meta">
-            <span class="page-badge">p. 47–68</span>
-            <a href="pdfs/v2/05_capovilla_et_al_1995_nomos_v31_resolucao_problemas.pdf" class="pdf-btn" target="_blank" rel="noopener">
+            <span class="page-badge">p. 47–68 · 06.pdf</span>
+            <a href="artigos/Vol2/06.pdf" class="pdf-btn" target="_blank" rel="noopener">
               <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
               PDF
             </a>
           </div>
         </div>
 
-        <div class="article-item" data-searchable="Educação Regras NOMOS V3 condições resolução silenciosa verbalizada interferência diferentes graus dificuldade educação Verônica Bender Haydu Fernando César Capovilla Ana Nora Jacob Naiene Pimentel Rosimary Lima Guilherme Eliseu Macedo Marcello Duduchi Alessandra Seabra Capovilla UEL USP">
+        <div class="article-item" data-searchable="Edução Regras NOMOS V3 efeito condições resolução silenciosa verbalizada interferência diferentes graus dificuldade Verônica Bender Haydu UEL Fernando César Capovilla USP Ana Nora Jacob Naiene Pimentel Rosimary Lima Guilherme UEL Eliseu Macedo Marcello Duduchi Alessandra Seabra Capovilla USP">
           <span class="article-num">06</span>
           <div class="article-body">
-            <p class="article-title">Educação de Regras em NOMOS V3: efeito de condições de resolução silenciosa, verbalizada e sob interferência, sob diferentes graus de dificuldade de educação</p>
+            <p class="article-title">Edução de Regras em NOMOS V3: efeito de condições de resolução silenciosa, verbalizada e sob interferência, sob diferentes graus de dificuldade de edução</p>
             <p class="article-authors">Verônica Bender Haydu · Fernando César Capovilla · Ana Nora Jacob · Naiene S. Pimentel · Rosimary Lima Guilherme · Eliseu C. Macedo · Marcello Duduchi · Alessandra G. Seabra Capovilla</p>
-            <p class="article-institution">UEL · Universidade de São Paulo</p>
+            <p class="article-institution">Universidade Estadual de Londrina · Universidade de São Paulo</p>
           </div>
           <div class="article-meta">
-            <span class="page-badge">p. 69–90</span>
-            <a href="pdfs/v2/06_haydu_et_al_1995_nomos_v3_educacao_regras.pdf" class="pdf-btn" target="_blank" rel="noopener">
+            <span class="page-badge">p. 69–90 · 07.pdf</span>
+            <a href="artigos/Vol2/07.pdf" class="pdf-btn" target="_blank" rel="noopener">
               <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
               PDF
             </a>
@@ -1578,8 +2140,8 @@
             <p class="article-institution">Universidade Estadual de Londrina</p>
           </div>
           <div class="article-meta">
-            <span class="page-badge">p. 91–108</span>
-            <a href="pdfs/v2/07_haydu_rezende_1995_ciencia_comportamento_psicologia.pdf" class="pdf-btn" target="_blank" rel="noopener">
+            <span class="page-badge">p. 91–108 · 08.pdf</span>
+            <a href="artigos/Vol2/08.pdf" class="pdf-btn" target="_blank" rel="noopener">
               <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
               PDF
             </a>
@@ -1594,8 +2156,8 @@
             <p class="article-institution">Universidade Estadual de Londrina</p>
           </div>
           <div class="article-meta">
-            <span class="page-badge">p. 109–110</span>
-            <a href="pdfs/v2/08_zanberlan_1995_praticas_psicossociais_familias_londrina.pdf" class="pdf-btn" target="_blank" rel="noopener">
+            <span class="page-badge">p. 109–110 · 09.pdf</span>
+            <a href="artigos/Vol2/09.pdf" class="pdf-btn" target="_blank" rel="noopener">
               <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
               PDF
             </a>
@@ -1603,45 +2165,169 @@
         </div>
 
       </div>
+
+      <p class="articles-section-label" style="margin-top:2rem;">Normas e Instruções</p>
+      <div class="editorial-item" style="margin-top:0.5rem;">
+        <p class="article-title">Normas para Publicação</p>
+        <p class="article-authors">Torre de Babel — Volume 2, 1995</p>
+        <div style="margin-top:0.75rem; display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap;">
+          <span class="page-badge">p. 111 · arquivo: 10.pdf</span>
+          <a href="artigos/Vol2/10.pdf" class="pdf-btn" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+            PDF
+          </a>
+        </div>
+      </div>
     </div>
 
     <!-- ─ VOL 3 ─ -->
     <div id="vol-3" class="volume-panel">
       <div class="volume-header">
-        <div class="volume-cover-placeholder vol3-cover">
-          <div class="vol3-left"><div class="psi">Ψ</div></div>
-          <div class="vol3-right">
-            <div class="torre-text">TORRE<br/>DE BABEL</div>
-            <div class="issn">ISSN 1414-0551</div>
-            <div style="margin-top:auto; font-family:'Space Mono',monospace; font-size:0.38rem; color:#162B1E; line-height:1.4;">
-              Reflexões e Pesquisa<br/>em Psicologia<br/>UEL · v.3 · Set.1996
-            </div>
-          </div>
+        <div style="flex-shrink:0;">
+          <img src="img/capa3.jpg" alt="Torre de Babel — Volume 3, Set. 1996"
+               style="width:130px; height:auto; display:block; box-shadow:3px 5px 16px rgba(20,18,14,0.22);" />
         </div>
         <div class="volume-info">
           <h3>Volume 3 — Setembro 1996</h3>
-          <p class="volume-byline">Torre de Babel: Refl.Pesq.Psic. · ISSN 1414-0551 · v.3 · p.1–103 · Set. 1996 · Londrina, PR · Editora UEL</p>
-          <p>O terceiro volume consolida a identidade visual da revista — o design bicolor verde-escuro/branco com o símbolo Ψ em destaque. Com ISSN registrado (1414-0551), a publicação alcança reconhecimento oficial como periódico científico. Os PDFs dos artigos deste volume estão sendo processados para inclusão neste arquivo.</p>
+          <p class="volume-byline">Torre Babel: Refl.Pesq.Psicol. · ISSN 1414-0551 · v.3 · p.1–103 · Set. 1996 · Londrina, PR · Editora UEL</p>
+          <p>O terceiro volume consolida o ISSN cadastrado no Centro Brasileiro do ISSN/IBICT e inaugura um perfil mais diversificado — todos os 6 artigos são de pesquisadores externos à UEL (USP, PUC-SP, UFPR, UERJ), refletindo a consolidação da revista como veículo de circulação nacional. Chefe do Depto.: Profª Dra. Maura Alves Nunes Gongora.</p>
           <div class="volume-tags">
             <span class="tag">ISSN 1414-0551</span>
             <span class="tag">Circulação Nacional</span>
-            <span class="tag">Editora UEL</span>
+            <span class="tag">Emoção</span>
+            <span class="tag">Condicionamento Clássico</span>
+            <span class="tag">Língua de Sinais</span>
+            <span class="tag">Agressão Humana</span>
+            <span class="tag">Teste Peabody</span>
           </div>
         </div>
       </div>
+
+      <div class="editorial-item">
+        <p class="articles-section-label" style="border:none; padding:0; margin-bottom:0.35rem;">Editorial + Sumário</p>
+        <p class="article-title">Editorial — Volume 3</p>
+        <p class="article-authors">Verônica Bender Haydu · Dione de Rezende</p>
+        <p class="article-institution">Depto. de Psicologia Geral e Análise do Comportamento — UEL</p>
+        <div style="margin-top:0.75rem; display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap;">
+          <span class="page-badge">p. 5 · arquivo: 01.pdf</span>
+          <a href="artigos/Vol3/01.pdf" class="pdf-btn" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+            PDF
+          </a>
+        </div>
+      </div>
+
+      <p class="articles-section-label" style="margin-top:1.5rem;">Artigos</p>
       <div class="article-list" id="list-vol-3">
-        <div class="article-item" data-searchable="volume 3 1996 em processamento">
-          <span class="article-num">—</span>
+
+        <div class="article-item" data-searchable="De que trata a emoção César Ades USP São Paulo afeto sentimento psicologia experimental">
+          <span class="article-num">01</span>
           <div class="article-body">
-            <p class="article-title" style="font-style:italic; color:var(--muted);">Artigos do Volume 3 em processamento</p>
-            <p class="article-authors">Os PDFs individuais deste volume serão adicionados em breve. Consulte o arquivo completo do volume enquanto isso.</p>
+            <p class="article-title">De que Trata a Emoção</p>
+            <p class="article-authors">César Ades</p>
+            <p class="article-institution">Universidade de São Paulo — São Paulo</p>
           </div>
           <div class="article-meta">
-            <a href="pdfs/v3/volume3_completo_1996.pdf" class="pdf-btn" target="_blank" rel="noopener">
+            <span class="page-badge">p. 7–26 · 02.pdf</span>
+            <a href="artigos/Vol3/02.pdf" class="pdf-btn" target="_blank" rel="noopener">
               <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
-              Volume Completo
+              PDF
             </a>
           </div>
+        </div>
+
+        <div class="article-item" data-searchable="Desenvolvimento Pessoal Terapeuta Análises Informais Formador Psicoterapia Roberto Alves Banaco PUC SP Pontifícia Universidade Católica São Paulo">
+          <span class="article-num">02</span>
+          <div class="article-body">
+            <p class="article-title">O Desenvolvimento Pessoal do Terapeuta: Análises Informais de um Formador em Psicoterapia</p>
+            <p class="article-authors">Roberto Alves Banaco</p>
+            <p class="article-institution">Faculdade de Psicologia — Pontifícia Universidade Católica de São Paulo (PUC-SP)</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 27–41 · 03.pdf</span>
+            <a href="artigos/Vol3/03.pdf" class="pdf-btn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Fatores Temporais Condicionamento Clássico José Lino Oliveira Bueno USP Ribeirão Preto pavlov aprendizagem">
+          <span class="article-num">03</span>
+          <div class="article-body">
+            <p class="article-title">Fatores Temporais no Condicionamento Clássico</p>
+            <p class="article-authors">José Lino Oliveira Bueno</p>
+            <p class="article-institution">Universidade de São Paulo — Ribeirão Preto</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 43–52 · 04.pdf</span>
+            <a href="artigos/Vol3/04.pdf" class="pdf-btn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Língua Sinais Sistemas Sinais Fernando César Capovilla Alessandra Seabra Capovilla Elizeu Coutinho Macedo USP UERJ São Paulo Rio de Janeiro surdos comunicação">
+          <span class="article-num">04</span>
+          <div class="article-body">
+            <p class="article-title">Língua de Sinais ou Sistemas de Sinais?</p>
+            <p class="article-authors">Fernando César Capovilla · Alessandra G. Seabra Capovilla · Elizeu Coutinho Macedo</p>
+            <p class="article-institution">Universidade de São Paulo · Universidade do Estado do Rio de Janeiro (UERJ)</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 53–69 · 05.pdf</span>
+            <a href="artigos/Vol3/05.pdf" class="pdf-btn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Agressão Humana Paula Inez Cunha Gomide UFPR Universidade Federal Paraná violência comportamento agressivo">
+          <span class="article-num">05</span>
+          <div class="article-body">
+            <p class="article-title">Agressão Humana</p>
+            <p class="article-authors">Paula Inez Cunha Gomide</p>
+            <p class="article-institution">Universidade Federal do Paraná (UFPR)</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 71–87 · 06.pdf</span>
+            <a href="artigos/Vol3/06.pdf" class="pdf-btn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Estudos Preliminares Adaptação Validação Brasileiras Teste Vocabulário Imagens Peabody Fernando Capovilla Leila Nunes Alessandra Capovilla Daniel Nogueira Ivânia Araújo Débora Nunes Ana Beatriz Bernat Walkíria Raphael USP UERJ avaliação neuropsicológica linguagem">
+          <span class="article-num">06</span>
+          <div class="article-body">
+            <p class="article-title">Estudos Preliminares para Adaptação e Validação Brasileiras do Teste de Vocabulário por Imagens Peabody</p>
+            <p class="article-authors">Fernando Capovilla · Leila Nunes · Alessandra Capovilla · Daniel Nogueira · Ivânia Araújo · Débora Nunes · Ana Beatriz Bernat · Walkíria Raphael</p>
+            <p class="article-institution">Universidade de São Paulo · Universidade do Estado do Rio de Janeiro (UERJ)</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 89–99 · 07.pdf</span>
+            <a href="artigos/Vol3/07.pdf" class="pdf-btn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="articles-section-label" style="margin-top:2rem;">Normas e Instruções</p>
+      <div class="editorial-item" style="margin-top:0.5rem;">
+        <p class="article-title">Normas para Publicação</p>
+        <p class="article-authors">Torre de Babel — Volume 3, 1996</p>
+        <div style="margin-top:0.75rem; display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap;">
+          <span class="page-badge">p. 101–103 · arquivo: 08.pdf</span>
+          <a href="artigos/Vol3/08.pdf" class="pdf-btn" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+            PDF
+          </a>
         </div>
       </div>
     </div>
@@ -1649,35 +2335,309 @@
     <!-- ─ VOL 4 ─ -->
     <div id="vol-4" class="volume-panel">
       <div class="volume-header">
-        <div class="volume-cover-placeholder vol3-cover">
-          <div class="vol3-left"><div class="psi">Ψ</div></div>
-          <div class="vol3-right">
-            <div class="torre-text">TORRE<br/>DE BABEL</div>
-            <div class="issn">ISSN 1414-0551</div>
-            <div style="margin-top:auto; font-family:'Space Mono',monospace; font-size:0.38rem; color:#162B1E; line-height:1.4;">
-              Reflexões e Pesquisa<br/>em Psicologia<br/>UEL · v.4 · 1997
-            </div>
+        <div style="display:flex; gap:0.75rem; align-items:flex-end; flex-shrink:0;">
+          <div style="text-align:center;">
+            <img src="img/capa4_1.jpg" alt="Vol. 4, n.1, Mar. 1997"
+                 style="width:88px; height:auto; display:block; box-shadow:3px 5px 16px rgba(20,18,14,0.22);" />
+            <p style="font-family:'Space Mono',monospace; font-size:0.5rem; color:var(--muted); margin-top:0.4rem; letter-spacing:0.08em; text-align:center;">n.1 · Mar.</p>
+          </div>
+          <div style="text-align:center;">
+            <img src="img/capa4_2.jpg" alt="Vol. 4, n.2, Set. 1997"
+                 style="width:88px; height:auto; display:block; box-shadow:3px 5px 16px rgba(20,18,14,0.22);" />
+            <p style="font-family:'Space Mono',monospace; font-size:0.5rem; color:var(--muted); margin-top:0.4rem; letter-spacing:0.08em; text-align:center;">n.2 · Set.</p>
           </div>
         </div>
         <div class="volume-info">
           <h3>Volume 4 — 1997</h3>
-          <p class="volume-byline">Torre de Babel: Refl.Pesq.Psic. · ISSN 1414-0551 · v.4 · 1997 · Londrina, PR · Editora UEL</p>
-          <p>O quarto volume da revista. Os PDFs dos artigos deste volume estão sendo processados para inclusão neste arquivo digital.</p>
+          <p class="volume-byline">Torre de Babel: Refl.Pesq.Psicol. · ISSN 1414-0551 · v.4, n.1 (p.1–187, Mar.1997) + n.2 (p.189–340, Set.1997) · Londrina, PR · Editora UEL</p>
+          <p>A partir deste volume a revista passa a ter <strong>periodicidade semestral</strong>. O quarto volume foi publicado em dois números em 1997, totalizando 340 páginas. O n.1 (março) reúne artigos sobre comunicação alternativa, leitura fonológica, raciocínio, psicoterapia e paralisado cerebral. Chefe do Depto.: Profª Dra. Maura Alves Nunes Gongora.</p>
+          <div class="volume-tags">
+            <span class="tag">ISSN 1414-0551</span>
+            <span class="tag">Periodicidade Semestral</span>
+            <span class="tag">Comunicação Alternativa</span>
+            <span class="tag">Leitura Fonológica</span>
+            <span class="tag">Psicoterapia</span>
+          </div>
         </div>
       </div>
+
+      <!-- ── NÚMERO 1 ── -->
+      <p class="articles-section-label" style="margin-top:1.5rem; color:var(--forest); border-color:var(--forest);">
+        Número 1 — Março 1997 · p. 1–187
+      </p>
+
+      <div class="editorial-item">
+        <p class="articles-section-label" style="border:none; padding:0; margin-bottom:0.35rem;">Editorial + Sumário</p>
+        <p class="article-title">Editorial — Vol. 4, n.1</p>
+        <p class="article-authors">Verônica Bender Haydu · Dione de Rezende</p>
+        <p class="article-institution">Depto. de Psicologia Geral e Análise do Comportamento — UEL</p>
+        <div style="margin-top:0.75rem; display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap;">
+          <span class="page-badge">p. 5 · arquivo: 01.pdf</span>
+          <a href="artigos/Vol4/n1/01.pdf" class="pdf-btn" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+            PDF
+          </a>
+        </div>
+      </div>
+
       <div class="article-list" id="list-vol-4">
-        <div class="article-item" data-searchable="volume 4 1997 em processamento">
-          <span class="article-num">—</span>
+
+        <div class="article-item" data-searchable="Breve Histórico Aplicação Meios Sistemas Alternativos Promotores Comunicação Afasias Fernando César Capovilla Alessandra Gotuzo Seabra Capovilla Elizeu Coutinho Macedo USP São Paulo Instituto Psicologia afasia comunicação alternativa aumentativa">
+          <span class="article-num">01</span>
           <div class="article-body">
-            <p class="article-title" style="font-style:italic; color:var(--muted);">Artigos do Volume 4 em processamento</p>
-            <p class="article-authors">Os PDFs individuais deste volume serão adicionados em breve.</p>
+            <p class="article-title">Breve Histórico da Aplicação de Meios e Sistemas Alternativos e Promotores de Comunicação para Afasias</p>
+            <p class="article-authors">Fernando César Capovilla · Alessandra Gotuzo Seabra Capovilla · Elizeu Coutinho de Macedo</p>
+            <p class="article-institution">Instituto de Psicologia — Universidade de São Paulo</p>
           </div>
           <div class="article-meta">
-            <a href="pdfs/v4/volume4_completo_1997.pdf" class="pdf-btn" target="_blank" rel="noopener">
+            <span class="page-badge">p. 7–42 · 02.pdf</span>
+            <a href="artigos/Vol4/n1/02.pdf" class="pdf-btn" target="_blank" rel="noopener">
               <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
-              Volume Completo
+              PDF
             </a>
           </div>
+        </div>
+
+        <div class="article-item" data-searchable="Avaliação Estratégias Leitura Fonológica Lexical I Descrição Técnica Software Cronofonos Fernando César Capovilla Elizeu Coutinho Macedo USP Marcelo Duduchi FATEC São Paulo Roberto Amilton Bernardes Sória Escola Politécnica">
+          <span class="article-num">02</span>
+          <div class="article-body">
+            <p class="article-title">Avaliação das Estratégias de Leitura Fonológica e Lexical I: Descrição Técnica do <em>Software</em> Cronofonos 2.0</p>
+            <p class="article-authors">Fernando César Capovilla · Elizeu Coutinho de Macedo · Marcelo Duduchi · Roberto Amilton Bernardes Sória</p>
+            <p class="article-institution">Instituto de Psicologia — USP · Faculdade Tecnológica de São Paulo · Escola Politécnica — USP</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 43–72 · 03.pdf</span>
+            <a href="artigos/Vol4/n1/03.pdf" class="pdf-btn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Avaliação Estratégias Leitura Fonológica Lexical II Aplicação Software Cronofonos Universitários Fernando César Capovilla Elizeu Coutinho Macedo USP Marcelo Duduchi FATEC Roberto Amilton Bernardes Sória Politécnica">
+          <span class="article-num">03</span>
+          <div class="article-body">
+            <p class="article-title">Avaliação das Estratégias de Leitura Fonológica e Lexical II: Aplicação do <em>Software</em> Cronofonos 2.0 a Universitários</p>
+            <p class="article-authors">Fernando César Capovilla · Elizeu Coutinho de Macedo · Marcelo Duduchi · Roberto Amilton Bernardes Sória</p>
+            <p class="article-institution">Instituto de Psicologia — USP · Faculdade Tecnológica de São Paulo · Escola Politécnica — USP</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 73–104 · 04.pdf</span>
+            <a href="artigos/Vol4/n1/04.pdf" class="pdf-btn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Resolução Problemas Raciocínio Carlos Eduardo Costa Universidade Paulista Fernando César Capovilla USP São Paulo cognição solução problema">
+          <span class="article-num">04</span>
+          <div class="article-body">
+            <p class="article-title">Resolução de Problemas e Raciocínio</p>
+            <p class="article-authors">Carlos Eduardo Costa · Fernando César Capovilla</p>
+            <p class="article-institution">Universidade Paulista · Universidade de São Paulo</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 105–130 · 05.pdf</span>
+            <a href="artigos/Vol4/n1/05.pdf" class="pdf-btn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Psicoterapia Analítico-Funcional Aplicada Terapia Comportamental Infantil Participação Criança Cynthia Borges Moura Fátima Cristina Souza Conte UEL Londrina FAP terapia infantil">
+          <span class="article-num">05</span>
+          <div class="article-body">
+            <p class="article-title">A Psicoterapia Analítico-Funcional Aplicada à Terapia Comportamental Infantil: a Participação da Criança</p>
+            <p class="article-authors">Cynthia Borges de Moura · Fátima Cristina de Souza Conte</p>
+            <p class="article-institution">Universidade Estadual de Londrina</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 131–144 · 06.pdf</span>
+            <a href="artigos/Vol4/n1/06.pdf" class="pdf-btn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Análise Contingências Reformulação Regras Processo Terapêutico Verônica Bender Haydu UEL Londrina análise comportamento clínica regras verbais">
+          <span class="article-num">06</span>
+          <div class="article-body">
+            <p class="article-title">A Análise de Contingências e a Reformulação de Regras no Processo Terapêutico</p>
+            <p class="article-authors">Verônica Bender Haydu</p>
+            <p class="article-institution">Universidade Estadual de Londrina</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 145–160 · 07.pdf</span>
+            <a href="artigos/Vol4/n1/07.pdf" class="pdf-btn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Processamento Informação Paralisado Cerebral Uso Sistemas Comunicação Alternativa Próteses Cognitivas Fernando Capovilla Elizeu Macedo Alessandra Gotuzo Seabra Capovilla USP São Paulo paralisia cerebral CAA comunicação aumentativa">
+          <span class="article-num">07</span>
+          <div class="article-body">
+            <p class="article-title">O Processamento de Informação no Paralisado Cerebral e o Uso de Sistemas de Comunicação Alternativa como Próteses Cognitivas</p>
+            <p class="article-authors">Fernando C. Capovilla · Elizeu C. Macedo · Alessandra Gotuzo Seabra Capovilla</p>
+            <p class="article-institution">Instituto de Psicologia — Universidade de São Paulo</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 161–184 · 08.pdf</span>
+            <a href="artigos/Vol4/n1/08.pdf" class="pdf-btn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="articles-section-label" style="margin-top:2rem;">Normas e Instruções — n.1</p>
+      <div class="editorial-item" style="margin-top:0.5rem;">
+        <p class="article-title">Normas para Publicação</p>
+        <p class="article-authors">Torre de Babel — Vol. 4, n.1, 1997</p>
+        <div style="margin-top:0.75rem; display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap;">
+          <span class="page-badge">p. 185–187 · arquivo: 09.pdf</span>
+          <a href="artigos/Vol4/n1/09.pdf" class="pdf-btn" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+            PDF
+          </a>
+        </div>
+      </div>
+
+      <!-- ── NÚMERO 2 ── -->
+      <p class="articles-section-label" style="margin-top:2.5rem; color:var(--forest); border-color:var(--forest);">
+        Número 2 — Setembro 1997 · p. 189–340
+      </p>
+
+      <div class="editorial-item" style="margin-top:0.5rem;">
+        <p class="articles-section-label" style="border:none; padding:0; margin-bottom:0.35rem;">Editorial + Sumário</p>
+        <p class="article-title">Editorial — Vol. 4, n.2</p>
+        <p class="article-authors">Verônica Bender Haydu</p>
+        <p class="article-institution">Depto. de Psicologia Geral e Análise do Comportamento — UEL</p>
+        <div style="margin-top:0.75rem; display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap;">
+          <span class="page-badge">arquivo: 01.pdf</span>
+          <a href="artigos/Vol4/n2/01.pdf" class="pdf-btn" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+            PDF
+          </a>
+        </div>
+      </div>
+
+      <div class="article-list" id="list-vol-4-n2">
+
+        <div class="article-item" data-searchable="Equação Equilíbrio Modelo Balança Análise Resolução Problemas Aritméticos Escolares Ensino Fundamental Fernando César Capovilla Otávio César Alessandra Gotuzo Seabra Capovilla USP Verônica Bender Haydu UEL matemática aritmética escola">
+          <span class="article-num">01</span>
+          <div class="article-body">
+            <p class="article-title">Equação-Equilíbrio: O Modelo da Balança e a Análise da Resolução de Problemas Aritméticos em Escolares do Ensino Fundamental</p>
+            <p class="article-authors">Fernando César Capovilla · Otávio César · Alessandra Gotuzo Seabra Capovilla · Verônica Bender Haydu</p>
+            <p class="article-institution">Universidade de São Paulo · Universidade Estadual de Londrina</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 189–216 · 02.pdf</span>
+            <a href="artigos/Vol4/n2/02.pdf" class="pdf-btn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Resolução Problemas Aritméticos Analisando Participação Processos Verbais Importância Posição Incógnita Verônica Bender Haydu Márcia Pires Andrade Luciana Siqueira Naiene Santos Pimentel Rosimary Lima Guilherme UEL Fernando César Capovilla USP matemática verbal">
+          <span class="article-num">02</span>
+          <div class="article-body">
+            <p class="article-title">Resolução de Problemas Aritméticos: Analisando a Participação de Processos Verbais e a Importância da Posição da Incógnita</p>
+            <p class="article-authors">Verônica Bender Haydu · Márcia Pires de Andrade · Luciana Siqueira · Naiene dos Santos Pimentel · Rosimary Lima Guilherme · Fernando César Capovilla</p>
+            <p class="article-institution">Universidade Estadual de Londrina · Universidade de São Paulo</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 217–232 · 03.pdf</span>
+            <a href="artigos/Vol4/n2/03.pdf" class="pdf-btn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Resolução Problemas NOMOS V3.1 I Efeitos Envolvimento Tarefa Notas Número Oportunidades Formular Hipóteses Formação Learning Set Carlos Eduardo Costa Universidade Paulista Fernando César Capovilla Elizeu Coutinho Macedo USP São Paulo">
+          <span class="article-num">03</span>
+          <div class="article-body">
+            <p class="article-title">Resolução de Problemas em NOMOS V3.1: I. Efeitos do Envolvimento na Tarefa sobre as Notas e do Número de Oportunidades de Formular Hipóteses sobre a Formação do <em>Learning Set</em></p>
+            <p class="article-authors">Carlos Eduardo Costa · Fernando César Capovilla · Elizeu Coutinho de Macedo</p>
+            <p class="article-institution">Universidade Paulista · Universidade de São Paulo</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 233–262 · 04.pdf</span>
+            <a href="artigos/Vol4/n2/04.pdf" class="pdf-btn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Resolução Problemas NOMOS V3.1 II Formulação Hipóteses Função Atributos Regra Carlos Eduardo Costa Universidade Paulista Fernando César Capovilla Elizeu Coutinho Macedo Instituto Psicologia USP São Paulo">
+          <span class="article-num">04</span>
+          <div class="article-body">
+            <p class="article-title">Resolução de Problemas em NOMOS V3.1: II. Formulação de Hipóteses como Função dos Atributos da Regra</p>
+            <p class="article-authors">Carlos Eduardo Costa · Fernando César Capovilla · Elizeu Coutinho de Macedo</p>
+            <p class="article-institution">Universidade Paulista · Instituto de Psicologia — Universidade de São Paulo</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 263–294 · 05.pdf</span>
+            <a href="artigos/Vol4/n2/05.pdf" class="pdf-btn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Imagética Mental Importância História Polêmica Natureza Representações Mentais Marson Guedes Fernando César Capovilla USP São Paulo imagem mental cognição representação">
+          <span class="article-num">05</span>
+          <div class="article-body">
+            <p class="article-title">Imagética Mental: Sua Importância, Sua História e a Polêmica sobre a Natureza das Representações Mentais</p>
+            <p class="article-authors">Marson Guedes · Fernando César Capovilla</p>
+            <p class="article-institution">Universidade de São Paulo</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 295–320 · 06.pdf</span>
+            <a href="artigos/Vol4/n2/06.pdf" class="pdf-btn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Ensaio Caracterização Psicobiologia Ari Bassi Nascimento UEL Londrina neurociência biologia comportamento psicobiologia">
+          <span class="article-num">06</span>
+          <div class="article-body">
+            <p class="article-title">Um Ensaio sobre a Caracterização da Psicobiologia</p>
+            <p class="article-authors">Ari Bassi Nascimento</p>
+            <p class="article-institution">Universidade Estadual de Londrina</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 321–336 · 07.pdf</span>
+            <a href="artigos/Vol4/n2/07.pdf" class="pdf-btn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="articles-section-label" style="margin-top:2rem;">Normas e Instruções — n.2</p>
+      <div class="editorial-item" style="margin-top:0.5rem;">
+        <p class="article-title">Normas para Publicação</p>
+        <p class="article-authors">Torre de Babel — Vol. 4, n.2, 1997</p>
+        <div style="margin-top:0.75rem; display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap;">
+          <span class="page-badge">p. 337–340 · arquivo: 08.pdf</span>
+          <a href="artigos/Vol4/n2/08.pdf" class="pdf-btn" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+            PDF
+          </a>
         </div>
       </div>
     </div>
@@ -1685,35 +2645,133 @@
     <!-- ─ VOL 5 ─ -->
     <div id="vol-5" class="volume-panel">
       <div class="volume-header">
-        <div class="volume-cover-placeholder vol3-cover">
-          <div class="vol3-left"><div class="psi">Ψ</div></div>
-          <div class="vol3-right">
-            <div class="torre-text">TORRE<br/>DE BABEL</div>
-            <div class="issn">ISSN 1414-0551</div>
-            <div style="margin-top:auto; font-family:'Space Mono',monospace; font-size:0.38rem; color:#162B1E; line-height:1.4;">
-              Reflexões e Pesquisa<br/>em Psicologia<br/>UEL · v.5 · 1998
-            </div>
-          </div>
+        <div style="flex-shrink:0;">
+          <img src="img/capa5_1.jpg" alt="Vol. 5, n.1/2, Set. 1998"
+               style="width:130px; height:auto; display:block; box-shadow:3px 5px 16px rgba(20,18,14,0.22);" />
         </div>
         <div class="volume-info">
-          <h3>Volume 5 — 1998</h3>
-          <p class="volume-byline">Torre de Babel: Refl.Pesq.Psic. · ISSN 1414-0551 · v.5 · 1998 · Londrina, PR · Editora UEL</p>
-          <p>O último volume da revista, encerrando a trajetória da publicação. Os PDFs dos artigos deste volume estão sendo processados para inclusão neste arquivo.</p>
+          <h3>Volume 5, n.1/2 — Setembro 1998</h3>
+          <p class="volume-byline">Torre de Babel: Refl.Pesq.Psicol. · ISSN 1414-0551 · v.5, n.1/2 · p.1–142 · Set. 1998 · Londrina, PR · Editora UEL</p>
+          <p>Último volume da revista, publicado como número duplo (n.1/2). Neste volume Dione de Rezende assume o título de <strong>Editor Científico Emérito</strong>, sendo Verônica Bender Haydu a única Editor Científico. O Sumário é pela primeira vez <strong>bilíngue</strong> (português + inglês). O Conselho passa a se chamar <strong>Conselho Científico</strong>, com a inclusão de Dra. Zilda Del Pretti (UFScr). Editoração realizada por Paula Orchiucci Miura (bolsista CNPq).</p>
+          <div class="volume-tags">
+            <span class="tag">ISSN 1414-0551</span>
+            <span class="tag">Número duplo n.1/2</span>
+            <span class="tag">Sumário bilíngue</span>
+            <span class="tag">Último volume</span>
+            <span class="tag">Editor Emérito</span>
+          </div>
         </div>
       </div>
+
+      <div class="editorial-item">
+        <p class="articles-section-label" style="border:none; padding:0; margin-bottom:0.35rem;">Editorial + Sumário</p>
+        <p class="article-title">Editorial — Vol. 5, n.1/2</p>
+        <p class="article-authors">Verônica Bender Haydu <span style="font-family:'Space Mono',monospace; font-size:0.6rem; color:var(--muted);">(Editor Científico)</span></p>
+        <p class="article-institution">Depto. de Psicologia Geral e Análise do Comportamento — UEL</p>
+        <div style="margin-top:0.75rem; display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap;">
+          <span class="page-badge">p. 5 · arquivo: 01.pdf</span>
+          <a href="artigos/Vol5/01.pdf" class="pdf-btn" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+            PDF
+          </a>
+        </div>
+      </div>
+
+      <p class="articles-section-label" style="margin-top:1.5rem;">Artigos</p>
       <div class="article-list" id="list-vol-5">
-        <div class="article-item" data-searchable="volume 5 1998 em processamento">
-          <span class="article-num">—</span>
+
+        <div class="article-item" data-searchable="Crenças Paradigmas Funções Distintas Similares Beliefs Paradigm Distinc Funtions Similarities Elsa Maria Mendes Pessoa Pullin UEL Londrina crenças epistemologia paradigma psicologia">
+          <span class="article-num">01</span>
           <div class="article-body">
-            <p class="article-title" style="font-style:italic; color:var(--muted);">Artigos do Volume 5 em processamento</p>
-            <p class="article-authors">Os PDFs individuais deste volume serão adicionados em breve.</p>
+            <p class="article-title">Crenças e Paradigmas: Funções Distintas ou Similares?</p>
+            <p class="article-authors">Elsa Maria Mendes Pessoa Pullin</p>
+            <p class="article-institution">Universidade Estadual de Londrina</p>
           </div>
           <div class="article-meta">
-            <a href="pdfs/v5/volume5_completo_1998.pdf" class="pdf-btn" target="_blank" rel="noopener">
+            <span class="page-badge">p. 7–18 · 02.pdf</span>
+            <a href="artigos/Vol5/02.pdf" class="pdf-btn" target="_blank" rel="noopener">
               <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
-              Volume Completo
+              PDF
             </a>
           </div>
+        </div>
+
+        <div class="article-item" data-searchable="Desenvolvendo Auto-Exposição Repertório Incompatível Comportamento Delinquente Developing Self-Exposition Incompatible Repertoire Delinquent Behavior Cynthia Borges Moura Fátima Cristina Souza Conte UEL Londrina adolescentes delinquência terapia">
+          <span class="article-num">02</span>
+          <div class="article-body">
+            <p class="article-title">Desenvolvendo a Auto-Exposição como um Repertório Incompatível com o Comportamento Delinquente</p>
+            <p class="article-authors">Cynthia Borges de Moura · Fátima Cristina de Souza Conte</p>
+            <p class="article-institution">Universidade Estadual de Londrina</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 19–44 · 03.pdf</span>
+            <a href="artigos/Vol5/03.pdf" class="pdf-btn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Interpretação Edução Regras Resolução Problemas Software NOMOS Psicologia Cognitiva Rules Edution Problem Solving Cognitive Psychology Concepts Alessandra Gotuzo Seabra Capovilla Fernando César Capovilla Elizeu Coutinho Macedo USP São Paulo UERJ">
+          <span class="article-num">03</span>
+          <div class="article-body">
+            <p class="article-title">Uma Interpretação da Edução de Regras para a Resolução de Problemas no <em>Software</em> NOMOS Baseada em Conceitos da Psicologia Cognitiva</p>
+            <p class="article-authors">Alessandra Gotuzo Seabra Capovilla · Fernando César Capovilla · Elizeu Coutinho de Macedo</p>
+            <p class="article-institution">Universidade de São Paulo · Universidade do Estado do Rio de Janeiro (UERJ)</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 45–86 · 04.pdf</span>
+            <a href="artigos/Vol5/04.pdf" class="pdf-btn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Caracterização População Atendida Clínicas-Escola Breve Revisão Bibliografia Nacional Epidemiology Brazilian Clinic Schools National Literature Review Daniela Centenaro Levandowski psicologia clínica serviço psicológico epidemiologia">
+          <span class="article-num">04</span>
+          <div class="article-body">
+            <p class="article-title">Caracterização da População Atendida por Clínicas-Escola: Breve Revisão da Bibliografia Nacional</p>
+            <p class="article-authors">Daniela Centenaro Levandowski</p>
+            <p class="article-institution" style="font-style:italic; color:var(--muted);">(instituição não especificada no sumário)</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 87–110 · 05.pdf</span>
+            <a href="artigos/Vol5/05.pdf" class="pdf-btn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Relações Equivalência Recordação Nomes Redes Relacionais Pessoas Conhecidas Desconhecidas Equivalence Relations Remembering Names Relational Network Liked Unliked People Verônica Bender Haydu Ana Claudia Sella Paranzini Juliana Rodrigues Tini Paula Orchiucci Miura UEL Londrina">
+          <span class="article-num">05</span>
+          <div class="article-body">
+            <p class="article-title">Relações de Equivalência e a Recordação de Nomes: Redes Relacionais Envolvendo Nomes de Pessoas Conhecidas e Desconhecidas</p>
+            <p class="article-authors">Verônica Bender Haydu · Ana Claudia Sella Paranzini · Juliana Rodrigues Tini · Paula Orchiucci Miura</p>
+            <p class="article-institution">Universidade Estadual de Londrina</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 111–138 · 06.pdf</span>
+            <a href="artigos/Vol5/06.pdf" class="pdf-btn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="articles-section-label" style="margin-top:2rem;">Normas e Instruções</p>
+      <div class="editorial-item" style="margin-top:0.5rem;">
+        <p class="article-title">Normas para Publicação</p>
+        <p class="article-authors">Torre de Babel — Vol. 5, n.1/2, 1998 <span style="font-family:'Space Mono',monospace; font-size:0.6rem; color:var(--muted);">— último número</span></p>
+        <div style="margin-top:0.75rem; display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap;">
+          <span class="page-badge">p. 139–142 · arquivo: 07.pdf</span>
+          <a href="artigos/Vol5/07.pdf" class="pdf-btn" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+            PDF
+          </a>
         </div>
       </div>
     </div>
@@ -1876,13 +2934,23 @@
 
     </div>
 
-    <!-- Citação recomendada -->
-    <div style="margin-top:3rem; border-top:1px solid var(--border); padding-top:2rem;">
-      <p style="font-family:'Space Mono',monospace; font-size:0.6rem; color:var(--mint); letter-spacing:0.18em; text-transform:uppercase; margin-bottom:0.75rem;">Citação recomendada</p>
-      <p style="font-family:'EB Garamond',serif; font-size:0.95rem; color:rgba(244,239,228,0.55); line-height:1.7; max-width:80ch;">
-        Torre de Babel: Reflexões e Pesquisa em Psicologia. Londrina: Departamento de Psicologia Geral e Análise do Comportamento, Universidade Estadual de Londrina. ISSN 1414-0551. 1994–1998. Digitalizado pelo CRIACOM/PPGAC-UEL. Disponível em: &lt;criacom.github.io&gt;. Acesso em: [data].
-      </p>
+    <!-- Researchers credits -->
+    <div style="margin-top:2rem; display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+
+      <div style="background:rgba(255,255,255,0.04); border:1px solid var(--border); padding:1.25rem 1.5rem; display:flex; flex-direction:column; gap:0.3rem;">
+        <p style="font-family:'Space Mono',monospace; font-size:0.55rem; color:var(--mint); letter-spacing:0.16em; text-transform:uppercase; margin-bottom:0.2rem;">Organização do Acervo Físico</p>
+        <p style="font-family:'Syne',sans-serif; font-size:1.05rem; font-weight:800; color:var(--cream);">Dr. Renan Kois</p>
+        <p style="font-family:'Space Mono',monospace; font-size:0.58rem; color:rgba(244,239,228,0.4); letter-spacing:0.06em;">PPGAC — Universidade Estadual de Londrina</p>
+      </div>
+
+      <div style="background:rgba(255,255,255,0.04); border:1px solid var(--border); padding:1.25rem 1.5rem; display:flex; flex-direction:column; gap:0.3rem;">
+        <p style="font-family:'Space Mono',monospace; font-size:0.55rem; color:var(--mint); letter-spacing:0.16em; text-transform:uppercase; margin-bottom:0.2rem;">Website</p>
+        <p style="font-family:'Syne',sans-serif; font-size:1.05rem; font-weight:800; color:var(--cream);">Dr. Hernando Neves Filho</p>
+        <p style="font-family:'Space Mono',monospace; font-size:0.58rem; color:rgba(244,239,228,0.4); letter-spacing:0.06em;">PPGAC — Universidade Estadual de Londrina</p>
+      </div>
+
     </div>
+
   </div>
 </section>
 
@@ -1898,9 +2966,10 @@
       <ul>
         <li>Torre de Babel: Refl.Pesq.Psic.</li>
         <li>ISSN 1414-0551</li>
-        <li>Volumes 1–5 (1994–1998)</li>
-        <li>Editora UEL</li>
-        <li>Londrina, Paraná, Brasil</li>
+        <li>5 Volumes · 6 Números (1994–1998)</li>
+        <li>v.1 (1994) · v.2 (1995) · v.3 (1996)</li>
+        <li>v.4 n.1+n.2 (1997) · v.5 n.1/2 (1998)</li>
+        <li>Editora UEL · Londrina, Paraná, Brasil</li>
         <li>Depto. Psicologia Geral e</li>
         <li>Análise do Comportamento — UEL</li>
       </ul>
@@ -1919,6 +2988,45 @@
 
 <script>
 // ─── COVER GALLERY ───
+/* ── Carousel ── */
+let carouselIndex = 0;
+function updateCarousel() {
+  const track = document.getElementById('carousel-track');
+  if (!track) return;
+  const cards = track.querySelectorAll('.featured-card');
+  const dots  = document.querySelectorAll('.carousel-dot');
+  const total = cards.length;
+  if (total === 0) return;
+
+  // Use the actual card pixel width + gap (1.5rem = 24px) for offset
+  const cardWidth = cards[0].offsetWidth;
+  const gap = parseFloat(getComputedStyle(track).gap) || 24;
+  const offset = carouselIndex * (cardWidth + gap);
+  track.style.transform = `translateX(-${offset}px)`;
+
+  dots.forEach((d, i) => d.classList.toggle('active', i === carouselIndex));
+  document.getElementById('carousel-prev').disabled = carouselIndex === 0;
+  document.getElementById('carousel-next').disabled = carouselIndex >= total - 1;
+}
+function goToSlide(n) { carouselIndex = n; updateCarousel(); }
+function prevSlide()  { if (carouselIndex > 0) { carouselIndex--; updateCarousel(); } }
+function nextSlide()  {
+  const total = document.querySelectorAll('#carousel-track .featured-card').length;
+  if (carouselIndex < total - 1) { carouselIndex++; updateCarousel(); }
+}
+/* Recalculate on resize so pixel offsets stay correct */
+window.addEventListener('resize', function() {
+  updateCarousel();
+});
+/* init */
+(function() {
+  const track = document.getElementById('carousel-track');
+  if (track) {
+    track.style.transition = 'transform 0.45s cubic-bezier(0.4,0,0.2,1)';
+    updateCarousel();
+  }
+})();
+
 function switchVol(vol, card) {
   const wasActive = card.classList.contains('active');
 
