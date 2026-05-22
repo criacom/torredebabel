@@ -1,0 +1,1998 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Torre de Babel — Arquivo Digital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --forest:   #162B1E;
+      --forest-mid: #1F3D2B;
+      --forest-light: #2D5A3E;
+      --mint:     #3DD68C;
+      --mint-dim: #28A86A;
+      --cream:    #F4EFE4;
+      --parchment:#EAE3D2;
+      --ink:      #14120E;
+      --ink-soft: #3A3530;
+      --muted:    #7A7264;
+      --border:   rgba(61,214,140,0.18);
+      --border-cream: rgba(20,18,14,0.12);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'EB Garamond', Georgia, serif;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--forest);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem;
+      height: 56px;
+      border-bottom: 2px solid var(--mint);
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 0.6rem;
+      text-decoration: none;
+    }
+    .nav-psi {
+      font-size: 1.5rem; color: var(--mint); font-weight: 700;
+      line-height: 1;
+    }
+    .nav-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.85rem; font-weight: 800;
+      color: var(--cream); letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .nav-right { display: flex; align-items: center; gap: 1rem; }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem; color: rgba(244,239,228,0.6);
+      text-decoration: none; letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--mint); }
+
+    /* ─── SEARCH BAR ─── */
+    .search-wrap {
+      position: relative; display: flex; align-items: center;
+    }
+    #search-input {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.4rem 2rem 0.4rem 0.75rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem; color: var(--cream);
+      width: 200px; outline: none;
+      transition: border-color 0.2s, width 0.3s;
+    }
+    #search-input::placeholder { color: rgba(244,239,228,0.35); }
+    #search-input:focus { border-color: var(--mint); width: 260px; }
+    .search-icon {
+      position: absolute; right: 0.6rem;
+      color: var(--mint); font-size: 0.8rem; pointer-events: none;
+    }
+    #search-results-count {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem; color: var(--mint);
+      margin-left: 0.5rem; white-space: nowrap;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      background: var(--forest);
+      position: relative; overflow: hidden;
+      min-height: 92vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 70% 50%, rgba(61,214,140,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-left {
+      display: flex; flex-direction: column;
+      justify-content: center;
+      padding: 5rem 3rem 5rem 4rem;
+      position: relative; z-index: 2;
+      border-right: 1px solid var(--border);
+    }
+    .hero-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.2em;
+      color: var(--mint); text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .hero-label::before {
+      content: ''; display: block;
+      width: 32px; height: 1px; background: var(--mint);
+    }
+    h1.hero-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(3.5rem, 6vw, 6rem);
+      font-weight: 800;
+      color: var(--cream);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.3rem;
+    }
+    h1.hero-title span { color: var(--mint); }
+    .hero-subtitle {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(1rem, 1.8vw, 1.3rem);
+      font-style: italic;
+      color: rgba(244,239,228,0.65);
+      margin-top: 1rem;
+      margin-bottom: 2.5rem;
+      max-width: 38ch;
+      line-height: 1.5;
+    }
+    .hero-meta {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border);
+      margin-bottom: 2.5rem; max-width: 400px;
+    }
+    .hero-meta-item {
+      background: var(--forest);
+      padding: 0.85rem 1rem;
+    }
+    .hero-meta-item dt {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem; color: var(--mint);
+      letter-spacing: 0.15em; text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+    .hero-meta-item dd {
+      font-size: 0.95rem; color: var(--cream);
+      font-weight: 500;
+    }
+    .hero-cta {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--mint); color: var(--forest);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.8rem 1.6rem;
+      border: none; border-radius: 3px;
+      cursor: pointer; text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: #5DE8A0; transform: translateY(-1px); }
+    .btn-ghost {
+      background: transparent; color: var(--cream);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.8rem 1.6rem;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      cursor: pointer; text-decoration: none;
+      display: inline-block;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--mint); color: var(--mint); }
+
+    .hero-right {
+      display: flex; align-items: center; justify-content: center;
+      position: relative; padding: 4rem 3rem;
+    }
+    .hero-psi-bg {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .hero-psi-bg span {
+      font-size: 40vmin; font-weight: 700;
+      color: rgba(61,214,140,0.05);
+      line-height: 1;
+      user-select: none;
+      animation: psi-drift 20s ease-in-out infinite alternate;
+    }
+    @keyframes psi-drift {
+      from { transform: translateY(-3%) rotate(-2deg); }
+      to   { transform: translateY(3%) rotate(2deg); }
+    }
+    .hero-card {
+      position: relative; z-index: 2;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      max-width: 380px; width: 100%;
+      backdrop-filter: blur(4px);
+    }
+    .hero-card-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem; color: var(--mint);
+      letter-spacing: 0.18em; text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .hero-card-tag::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+    .hero-quote {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.08rem; font-style: italic;
+      color: var(--cream);
+      line-height: 1.65;
+      margin-bottom: 1.2rem;
+    }
+    .hero-quote-attr {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem; color: rgba(244,239,228,0.45);
+      letter-spacing: 0.08em;
+    }
+
+    .lost-media-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(61,214,140,0.12);
+      border: 1px solid rgba(61,214,140,0.3);
+      border-radius: 2px;
+      padding: 0.35rem 0.75rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem; color: var(--mint);
+      letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .lost-media-badge .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--mint);
+      animation: blink 1.8s ease-in-out infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; } 50% { opacity: 0.2; }
+    }
+
+    /* ─── SECTION GENERAL ─── */
+    section { padding: 5rem 0; }
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 2rem; }
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.22em;
+      color: var(--mint-dim); text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .section-label::before {
+      content: ''; width: 24px; height: 1px; background: var(--mint-dim);
+    }
+    h2.section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800; color: var(--ink);
+      line-height: 1.1; letter-spacing: -0.02em;
+    }
+    h2.section-title-light { color: var(--cream); }
+
+    /* ─── MANIFESTO (About) ─── */
+    #sobre { background: var(--parchment); }
+    .manifesto-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 5rem; align-items: start;
+      margin-top: 3rem;
+    }
+    .manifesto-left {}
+    .manifesto-psi {
+      font-size: 8rem; line-height: 1;
+      color: var(--forest-light);
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      opacity: 0.4;
+    }
+    .manifesto-stats {
+      display: flex; flex-direction: column; gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .stat-item {}
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.8rem; font-weight: 800;
+      color: var(--forest); line-height: 1;
+    }
+    .stat-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted);
+      margin-top: 0.2rem;
+    }
+    .manifesto-right p {
+      font-size: 1.12rem; color: var(--ink-soft);
+      margin-bottom: 1.2rem; max-width: 58ch;
+    }
+    .manifesto-right p strong { color: var(--forest); }
+    .manifesto-right p em { font-style: italic; }
+
+    /* ─── QUOTE BLOCK ─── */
+    .quote-block {
+      background: var(--forest);
+      padding: 4rem 0;
+      position: relative; overflow: hidden;
+    }
+    .quote-block::before {
+      content: 'Ψ';
+      position: absolute; right: -2rem; top: -3rem;
+      font-size: 18rem; font-weight: 700;
+      color: rgba(61,214,140,0.04);
+      line-height: 1; user-select: none;
+    }
+    .quote-inner {
+      max-width: 800px; margin: 0 auto; padding: 0 2rem;
+      position: relative; z-index: 1;
+    }
+    .quote-mark {
+      font-size: 6rem; line-height: 0.6;
+      color: var(--mint); font-family: Georgia, serif;
+      display: block; margin-bottom: 1rem; opacity: 0.5;
+    }
+    blockquote.main-quote {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(1.2rem, 2.5vw, 1.65rem);
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.65;
+      margin-bottom: 1.5rem;
+    }
+    .quote-attribution {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem; color: var(--mint);
+      letter-spacing: 0.12em;
+    }
+
+    /* ─── VOLUMES ─── */
+    #volumes { background: var(--cream); }
+    /* volume-tabs removed — replaced by cover-gallery */
+
+    .volume-panel { display: none; padding-top: 2.5rem; }
+    .volume-panel.active { display: block; }
+
+    .volume-header {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 2.5rem; align-items: start;
+      margin-bottom: 2.5rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border-cream);
+    }
+    .volume-cover-placeholder {
+      width: 130px; flex-shrink: 0;
+      aspect-ratio: 3/4;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .vol1-cover {
+      background: #fff; border: 2px solid #222;
+    }
+    .vol1-cover-inner {
+      text-align: center; padding: 0.75rem;
+    }
+    .vol1-cover-inner .uel-logo {
+      width: 36px; height: 36px;
+      margin: 0 auto 0.5rem;
+      background: #222; border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .vol1-cover-inner .uel-logo svg { fill: #fff; width: 24px; }
+    .vol1-cover-inner p {
+      font-size: 0.42rem; font-weight: 700; color: #222;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      line-height: 1.3;
+    }
+    .vol1-cover-inner .torre {
+      font-size: 0.75rem; font-weight: 900;
+      color: #000; margin: 0.6rem 0 0.4rem;
+      font-family: 'Syne', sans-serif;
+    }
+    .vol2-cover {
+      background: #3DD68C; border: none;
+    }
+    .vol2-cover-inner {
+      text-align: left; padding: 0.5rem;
+      height: 100%; display: flex; flex-direction: column;
+      justify-content: space-between;
+    }
+    .vol2-cover-inner .title-big {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.75rem; font-weight: 900;
+      color: #000; letter-spacing: 0.02em;
+      line-height: 1.1;
+    }
+    .vol2-cover-inner .psi-bg {
+      font-size: 4rem; color: rgba(0,0,0,0.12);
+      line-height: 1; text-align: center; flex: 1;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .vol2-cover-inner .vol-info {
+      font-size: 0.42rem; font-weight: 700; color: #000;
+      display: flex; justify-content: space-between;
+    }
+    .vol3-cover {
+      display: grid; grid-template-columns: 45% 55%;
+      border: none;
+    }
+    .vol3-left {
+      background: #162B1E; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: flex-end;
+      padding: 0.5rem;
+    }
+    .vol3-left .psi { font-size: 3rem; color: rgba(255,255,255,0.4); }
+    .vol3-right {
+      background: #fff; padding: 0.5rem;
+      display: flex; flex-direction: column;
+      justify-content: flex-start;
+    }
+    .vol3-right .torre-text {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.62rem; font-weight: 800;
+      color: #162B1E; line-height: 1.1;
+      margin-bottom: 0.25rem;
+    }
+    .vol3-right .issn {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.4rem; color: #162B1E;
+    }
+
+    .volume-info h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem; font-weight: 800;
+      color: var(--ink); margin-bottom: 0.4rem;
+    }
+    .volume-info .volume-byline {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem; color: var(--muted);
+      letter-spacing: 0.08em; margin-bottom: 1rem;
+    }
+    .volume-info p {
+      font-size: 1rem; color: var(--ink-soft);
+      max-width: 52ch; line-height: 1.6;
+    }
+    .volume-tags {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+      margin-top: 1rem;
+    }
+    .tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.08em;
+      color: var(--forest-light);
+      border: 1px solid rgba(31,61,43,0.25);
+      padding: 0.25rem 0.6rem; border-radius: 2px;
+      background: rgba(31,61,43,0.05);
+    }
+
+    /* ─── ARTICLE LIST ─── */
+    .articles-section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-cream);
+    }
+    .article-list {
+      display: flex; flex-direction: column; gap: 0;
+    }
+    .article-item {
+      display: grid;
+      grid-template-columns: 40px 1fr auto;
+      gap: 1rem; align-items: center;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border-cream);
+      transition: background 0.15s;
+    }
+    .article-item:hover { background: rgba(31,61,43,0.03); }
+    .article-item.hidden { display: none; }
+
+    .article-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem; color: var(--mint-dim);
+      text-align: right; flex-shrink: 0;
+    }
+    .article-body {}
+    .article-title {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.05rem; font-weight: 600;
+      color: var(--ink); margin-bottom: 0.2rem;
+      line-height: 1.35;
+    }
+    .article-authors {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem; color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+    .article-institution {
+      font-size: 0.58rem; color: var(--muted);
+      font-family: 'Space Mono', monospace;
+      opacity: 0.7;
+    }
+    .article-meta {
+      display: flex; align-items: center; gap: 0.4rem;
+      flex-shrink: 0;
+    }
+    .page-badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem; color: var(--muted);
+      white-space: nowrap;
+    }
+    .pdf-btn {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      background: var(--forest); color: var(--mint);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.45rem 0.8rem;
+      border-radius: 2px; text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+      white-space: nowrap;
+      border: 1px solid transparent;
+    }
+    .pdf-btn:hover {
+      background: var(--mint); color: var(--forest);
+    }
+    .pdf-btn svg {
+      width: 12px; height: 12px; flex-shrink: 0;
+    }
+    .pdf-btn.unavailable {
+      background: rgba(122,114,100,0.1);
+      color: var(--muted);
+      border: 1px solid var(--border-cream);
+      cursor: default; pointer-events: none;
+    }
+
+    .editorial-item {
+      background: rgba(22,43,30,0.05);
+      border-left: 3px solid var(--forest);
+      padding: 1rem 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .editorial-item .article-title {
+      font-style: italic;
+    }
+
+    /* ─── SECOND QUOTE ─── */
+    .quote-block-2 {
+      background: var(--parchment);
+      padding: 4rem 0;
+      border-top: 1px solid var(--border-cream);
+      border-bottom: 1px solid var(--border-cream);
+    }
+    .quote-2-inner {
+      max-width: 860px; margin: 0 auto; padding: 0 2rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+    }
+    .quote-2-block {}
+    .quote-2-block .label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.18em;
+      color: var(--forest-light); text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .quote-2-block blockquote {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.05rem; font-style: italic;
+      color: var(--ink-soft); line-height: 1.65;
+      border-left: 2px solid var(--mint-dim);
+      padding-left: 1rem;
+    }
+    .quote-2-block .attr {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem; color: var(--muted);
+      margin-top: 0.75rem;
+    }
+
+    /* ─── EQUIPE ─── */
+    #equipe { background: var(--forest); }
+    .equipe-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem; margin-top: 2.5rem;
+    }
+    .equipe-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      padding: 1.25rem;
+    }
+    .equipe-role {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem; color: var(--mint);
+      letter-spacing: 0.14em; text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .equipe-name {
+      font-family: 'EB Garamond', serif;
+      font-size: 1rem; font-weight: 600;
+      color: var(--cream); margin-bottom: 0.25rem;
+    }
+    .equipe-inst {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem; color: rgba(244,239,228,0.4);
+      letter-spacing: 0.06em;
+    }
+
+    /* ─── ARCHIVE INFO ─── */
+    #arquivo { background: var(--parchment); }
+    .arquivo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem; margin-top: 3rem;
+    }
+    .arquivo-text h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.3rem; font-weight: 800;
+      color: var(--ink); margin-bottom: 1rem;
+    }
+    .arquivo-text p {
+      font-size: 1rem; color: var(--ink-soft);
+      line-height: 1.65; margin-bottom: 1rem;
+    }
+    .arquivo-structure {
+      background: var(--forest);
+      padding: 1.5rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem; color: var(--mint);
+      line-height: 2;
+    }
+    .arquivo-structure .comment { color: rgba(61,214,140,0.4); }
+    .arquivo-structure .path { color: var(--cream); }
+    .arquivo-structure .file { color: rgba(244,239,228,0.6); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #0D1B13;
+      padding: 3rem 0;
+      border-top: 2px solid var(--forest-light);
+    }
+    .footer-inner {
+      max-width: 1160px; margin: 0 auto; padding: 0 2rem;
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 3rem;
+    }
+    .footer-brand .psi-logo {
+      font-size: 2.5rem; color: var(--mint);
+      font-weight: 700; line-height: 1; margin-bottom: 0.5rem;
+    }
+    .footer-brand p {
+      font-family: 'EB Garamond', serif;
+      font-size: 0.9rem; color: rgba(244,239,228,0.5);
+      font-style: italic;
+    }
+    .footer-col h4 {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--mint);
+      margin-bottom: 1rem;
+    }
+    .footer-col p, .footer-col li {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem; color: rgba(244,239,228,0.45);
+      line-height: 1.8; letter-spacing: 0.04em;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-bottom {
+      max-width: 1160px; margin: 2rem auto 0; padding: 1.5rem 2rem 0;
+      border-top: 1px solid rgba(61,214,140,0.1);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-bottom p {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem; color: rgba(244,239,228,0.3);
+      letter-spacing: 0.06em;
+    }
+    .footer-bottom a {
+      color: var(--mint); text-decoration: none;
+    }
+
+    /* ─── SEARCH HIGHLIGHT ─── */
+    .highlight {
+      background: rgba(61,214,140,0.25);
+      border-radius: 2px;
+    }
+    .no-results {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem; color: var(--muted);
+      padding: 2rem 0; text-align: center;
+      display: none;
+    }
+    .no-results.visible { display: block; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-right { display: none; }
+      .manifesto-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .quote-2-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .arquivo-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .article-item { grid-template-columns: 32px 1fr; }
+      .article-meta { grid-column: 2; }
+      #resgate .resgate-grid { grid-template-columns: 1fr !important; }
+    }
+    @media (max-width: 720px) {
+      #resgate > .container > div[style*="grid-template-columns:1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+      }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .cover-gallery { gap: 1rem; }
+      .cover-card img, .cover-pending { width: 110px; height: 157px; }
+      .hero-journal img { width: 160px; }
+      #search-input { width: 140px; }
+      #search-input:focus { width: 160px; }
+      .volume-header { grid-template-columns: 1fr; }
+      .volume-cover-placeholder { width: 100px; }
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-label   { animation: fade-up 0.6s ease both; }
+    .lost-media-badge { animation: fade-up 0.6s 0.1s ease both; }
+    h1.hero-title { animation: fade-up 0.6s 0.15s ease both; }
+    .hero-subtitle { animation: fade-up 0.6s 0.25s ease both; }
+    .hero-meta    { animation: fade-up 0.6s 0.35s ease both; }
+    .hero-cta     { animation: fade-up 0.6s 0.45s ease both; }
+    .hero-card    { animation: fade-up 0.8s 0.3s ease both; }
+    /* ─── COVER GALLERY ─── */
+    .cover-gallery {
+      display: flex; gap: 2rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      padding-bottom: 3rem;
+      border-bottom: 3px solid var(--border-cream);
+    }
+    .cover-card {
+      display: flex; flex-direction: column; align-items: center;
+      cursor: pointer; position: relative; flex-shrink: 0;
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      user-select: none;
+    }
+    .cover-card img {
+      width: 148px; height: 210px; object-fit: cover; display: block;
+      box-shadow: 4px 6px 24px rgba(20,18,14,0.22), 1px 2px 6px rgba(20,18,14,0.1);
+      transition: box-shadow 0.3s;
+    }
+    .cover-card:not(.cover-card--pending):hover { transform: translateY(-8px); }
+    .cover-card:not(.cover-card--pending):hover img {
+      box-shadow: 6px 18px 44px rgba(20,18,14,0.34);
+    }
+    .cover-card.active { transform: translateY(-12px); }
+    .cover-card.active img {
+      box-shadow: 0 0 0 3px var(--mint), 6px 18px 44px rgba(20,18,14,0.3);
+    }
+    .cover-arrow {
+      width: 0; height: 0;
+      border-left: 12px solid transparent;
+      border-right: 12px solid transparent;
+      border-bottom: 0px solid transparent;
+      opacity: 0; margin-top: 0;
+      transition: opacity 0.25s, margin-top 0.3s, border-bottom-width 0.3s;
+    }
+    .cover-card.active .cover-arrow {
+      border-bottom-width: 12px;
+      border-bottom-color: var(--forest);
+      opacity: 1; margin-top: 10px;
+    }
+    .cover-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem; color: var(--muted);
+      letter-spacing: 0.12em; text-transform: uppercase;
+      margin-top: 0.75rem; text-align: center;
+      transition: color 0.2s;
+    }
+    .cover-card.active .cover-label { color: var(--forest); font-weight: 700; }
+    .cover-card--pending { cursor: not-allowed; opacity: 0.4; }
+    .cover-pending {
+      width: 148px; height: 210px;
+      background: linear-gradient(158deg, #162B1E 0%, #2D5A3E 100%);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 0.75rem; position: relative; overflow: hidden;
+      box-shadow: 4px 6px 24px rgba(20,18,14,0.2);
+    }
+    .cover-pending .psi-wm {
+      position: absolute; font-size: 8rem;
+      color: rgba(61,214,140,0.07); font-weight: 700;
+      user-select: none; pointer-events: none;
+    }
+    .cover-pending-badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.57rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(244,239,228,0.4);
+      border: 1px solid rgba(61,214,140,0.18);
+      padding: 0.3rem 0.65rem; border-radius: 2px; position: relative;
+    }
+    .cover-vol-ref {
+      font-family: 'Space Mono', monospace; font-size: 0.5rem;
+      color: rgba(61,214,140,0.25); letter-spacing: 0.1em;
+      text-transform: uppercase; position: relative;
+    }
+    .volume-panel { animation: panel-reveal 0.4s ease; }
+    @keyframes panel-reveal {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── HERO COVER ─── */
+    .hero-cover-wrap {
+      position: relative; z-index: 2;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 1.75rem;
+    }
+    .hero-journal {
+      position: relative; display: inline-block;
+    }
+    .hero-journal img {
+      width: 200px; height: auto; display: block;
+      box-shadow: -12px 16px 55px rgba(0,0,0,0.55), 4px 6px 20px rgba(0,0,0,0.28);
+      transform: rotate(-2.5deg);
+      transition: transform 0.4s cubic-bezier(0.34, 1.2, 0.64, 1), box-shadow 0.4s;
+    }
+    .hero-journal:hover img {
+      transform: rotate(0deg) translateY(-4px);
+      box-shadow: -12px 22px 65px rgba(0,0,0,0.62);
+    }
+    .hero-journal-badge {
+      position: absolute; top: -0.5rem; right: -1rem;
+      background: var(--mint); color: var(--forest);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.52rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.22rem 0.55rem; border-radius: 2px;
+      white-space: nowrap;
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <a href="#" class="nav-brand">
+    <span class="nav-psi">Ψ</span>
+    <span class="nav-title">Torre de Babel</span>
+  </a>
+  <div class="nav-right">
+    <nav class="nav-links">
+      <a href="#sobre">Sobre</a>
+      <a href="#volumes">Volumes</a>
+      <a href="#equipe">Equipe</a>
+      <a href="#resgate">Resgate</a>
+    </nav>
+    <div class="search-wrap">
+      <input type="search" id="search-input" placeholder="Buscar artigos…" autocomplete="off" />
+      <span class="search-icon">⌕</span>
+    </div>
+    <span id="search-results-count"></span>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="inicio">
+  <div class="hero-left">
+    <div class="hero-label">Arquivo Digital — Resgate de Lost Media</div>
+    <div class="lost-media-badge">
+      <span class="dot"></span>
+      Digitalizado em 2025 — acesso aberto pela primeira vez
+    </div>
+    <h1 class="hero-title">Torre<br/><span>de</span><br/>Babel</h1>
+    <p class="hero-subtitle">Reflexões e Pesquisa em Psicologia — o periódico científico da Análise do Comportamento do Sul do Brasil, existente apenas em edição física de 1994 a 1998, agora disponível digitalmente pela primeira vez.</p>
+    <dl class="hero-meta">
+      <div class="hero-meta-item">
+        <dt>Instituição</dt>
+        <dd>UEL — Londrina, PR</dd>
+      </div>
+      <div class="hero-meta-item">
+        <dt>Período</dt>
+        <dd>1994 – 1998</dd>
+      </div>
+      <div class="hero-meta-item">
+        <dt>ISSN</dt>
+        <dd>1414-0551</dd>
+      </div>
+      <div class="hero-meta-item">
+        <dt>Área</dt>
+        <dd>Análise do Comportamento</dd>
+      </div>
+    </dl>
+    <div class="hero-cta">
+      <a href="#volumes" class="btn-primary">Acessar os Volumes →</a>
+      <a href="#sobre" class="btn-ghost">Sobre o Projeto</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-psi-bg"><span>Ψ</span></div>
+    <div class="hero-cover-wrap">
+      <div class="hero-journal">
+        <img src="img/capa3.jpg" alt="Torre de Babel — Volume 3, Set. 1996" />
+        <span class="hero-journal-badge">Original · Set. 1996</span>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-tag">Do primeiro artigo publicado — Vol. 1, 1994</div>
+        <p class="hero-quote">"Há mais de 20 anos estivemos formalmente em contato quase diário com a Psicologia, ouvindo, lendo, refletindo, debatendo, ensinando, criticando, acreditando, praticando-a e depois de tanto tempo me sinto em casa para considerá-la como verdadeira Torre de Babel."</p>
+        <p class="hero-quote-attr">— Rodolpho Carbonari Sant'Anna<br/>Depto. de Psicologia Geral e Análise do Comportamento, UEL</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="sobre">
+  <div class="container">
+    <div class="section-label">O que é este arquivo</div>
+    <h2 class="section-title">Uma revista que quase<br/>desapareceu da história</h2>
+    <div class="manifesto-grid">
+      <div class="manifesto-left">
+        <div class="manifesto-psi">Ψ</div>
+        <div class="manifesto-stats">
+          <div class="stat-item">
+            <div class="stat-num">4+</div>
+            <div class="stat-label">Volumes publicados (1994–1998)</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">~30</div>
+            <div class="stat-label">Artigos científicos originais</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">0</div>
+            <div class="stat-label">Edições digitais disponíveis — até agora</div>
+          </div>
+        </div>
+      </div>
+      <div class="manifesto-right">
+        <p>A <strong>Torre de Babel</strong> foi um periódico científico revisado por pares, publicado pelo <strong>Departamento de Psicologia Geral e Análise do Comportamento</strong> da Universidade Estadual de Londrina (UEL). Nasceu em 1994 como <em>Revista de Psicologia Experimental e Análise do Comportamento</em> e evoluiu, a partir do Volume 2, para <em>Reflexões e Pesquisa em Psicologia</em>, ampliando seu escopo para circulação nacional.</p>
+        <p>Editada pelas Dras. <strong>Dione de Rezende</strong> e <strong>Verônica Bender Haydu</strong>, a revista reuniu contribuições de pesquisadores da UEL, USP, UNESP, UFP e UNOESTE, consolidando um espaço único de produção científica em Análise do Comportamento no Sul do Brasil durante os anos 1990.</p>
+        <p>A publicação existiu exclusivamente em <strong>formato impresso</strong>. Com o encerramento de suas atividades ao final dos anos 1990, suas edições tornaram-se progressivamente inacessíveis — ausentes de repositórios digitais, buscadores acadêmicos e bases de dados. Por mais de duas décadas, permaneceu como <em>lost media</em> da psicologia brasileira.</p>
+        <p>Este arquivo digital resgata e disponibiliza em acesso aberto os PDFs individuais de cada artigo de cada volume, preservando este importante capítulo da história da Análise do Comportamento no Brasil.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ QUOTE 1 ═══ -->
+<div class="quote-block">
+  <div class="quote-inner">
+    <span class="quote-mark">"</span>
+    <blockquote class="main-quote">
+      Nossa torre não é uma construção feita de pedra, tijolos, cimento... toda ela é feita de convenções, em parte proposições descritivas do "psicológico", em parte proposições avaliativas. A maleabilidade de tal material de construção vem viabilizando a objetivação de todo e qualquer projeto que a imaginação e criatividade de seus moradores tenha idealizado, imunes ao risco da fragilidade estrutural, pois a estabilidade já vem prescrita nas próprias proposições.
+    </blockquote>
+    <p class="quote-attribution">SANT'ANNA, Rodolpho Carbonari. O Psicólogo e sua Torre de Babel.<br/>Torre de Babel, v. 1, p. 6–10, 1994.</p>
+  </div>
+</div>
+
+<!-- ═══ VOLUMES ═══ -->
+<section id="volumes">
+  <div class="container">
+    <div class="section-label">Acervo Completo</div>
+    <h2 class="section-title">Volumes e Artigos</h2>
+    <p style="margin-top:0.75rem; font-size:1.05rem; color:var(--muted); max-width:58ch;">
+      Clique em <strong style="color:var(--forest)">↓ PDF</strong> para baixar o artigo individual. Cada arquivo é um PDF digitalizado inédito.
+    </p>
+
+    <!-- ─── COVER GALLERY ─── -->
+    <div class="cover-gallery" id="cover-gallery">
+
+      <!-- Vol 1 — active by default -->
+      <div class="cover-card active" id="cover-1" onclick="switchVol(1, this)">
+        <img src="img/capa1.jpg" alt="Torre de Babel — Volume 1, 1994" />
+        <div class="cover-arrow"></div>
+        <p class="cover-label">Vol. 1 · 1994</p>
+      </div>
+
+      <!-- Vol 2 -->
+      <div class="cover-card" id="cover-2" onclick="switchVol(2, this)">
+        <img src="img/capa2.jpg" alt="Torre de Babel — Volume 2, Setembro 1995" />
+        <div class="cover-arrow"></div>
+        <p class="cover-label">Vol. 2 · 1995</p>
+      </div>
+
+      <!-- Vol 3 -->
+      <div class="cover-card" id="cover-3" onclick="switchVol(3, this)">
+        <img src="img/capa3.jpg" alt="Torre de Babel — Volume 3, Setembro 1996" />
+        <div class="cover-arrow"></div>
+        <p class="cover-label">Vol. 3 · 1996</p>
+      </div>
+
+      <!-- Vol 4 — placeholder -->
+      <div class="cover-card cover-card--pending" id="cover-4" title="Capa em breve">
+        <div class="cover-pending">
+          <span class="psi-wm">Ψ</span>
+          <span class="cover-vol-ref">Vol. 4</span>
+          <span class="cover-pending-badge">Em breve</span>
+        </div>
+        <div class="cover-arrow" style="opacity:0;"></div>
+        <p class="cover-label">Vol. 4 · 1997</p>
+      </div>
+
+      <!-- Vol 5 — placeholder -->
+      <div class="cover-card cover-card--pending" id="cover-5" title="Capa em breve">
+        <div class="cover-pending">
+          <span class="psi-wm">Ψ</span>
+          <span class="cover-vol-ref">Vol. 5</span>
+          <span class="cover-pending-badge">Em breve</span>
+        </div>
+        <div class="cover-arrow" style="opacity:0;"></div>
+        <p class="cover-label">Vol. 5 · 1998</p>
+      </div>
+
+    </div>
+    <!-- ────────────────── -->
+
+    <!-- ─ VOL 1 ─ -->
+    <div id="vol-1" class="volume-panel active">
+      <div class="volume-header">
+        <div class="volume-cover-placeholder vol1-cover">
+          <div class="vol1-cover-inner">
+            <div class="uel-logo">
+              <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2"/></svg>
+            </div>
+            <p>UNIVERSIDADE ESTADUAL DE LONDRINA<br/>Depto. de Psicologia Geral e Análise do Comportamento</p>
+            <p class="torre">TORRE<br/>DE BABEL</p>
+            <p style="font-size:0.38rem; margin-top:0.5rem;">Revista de Psicologia Experimental<br/>e Análise do Comportamento<br/>1994</p>
+          </div>
+        </div>
+        <div class="volume-info">
+          <h3>Volume 1 — 1994</h3>
+          <p class="volume-byline">Torre de Babel: Revista de Psicologia Experimental e Análise do Comportamento · Vol. 1 · 1994 · Londrina, PR</p>
+          <p>Primeiro volume da revista, publicado em formato de circulação interna pelo Departamento de Psicologia Geral e Análise do Comportamento da UEL. Contém 5 artigos teórico-experimentais e 15 resumos de pesquisa. A edição original não possui ISSN registrado, refletindo o caráter inaugural da publicação. Editores: Dra. Dione de Rezende e Dra. Verônica Bender Haydu.</p>
+          <div class="volume-tags">
+            <span class="tag">Análise do Comportamento</span>
+            <span class="tag">Behaviorismo Radical</span>
+            <span class="tag">Psicofarmacologia</span>
+            <span class="tag">Comportamento Animal</span>
+            <span class="tag">Esquemas de Reforçamento</span>
+            <span class="tag">Discriminação de Estímulos</span>
+            <span class="tag">Esquiva</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PDF SVG icon reusable shorthand via inline -->
+      <div class="editorial-item">
+        <p class="articles-section-label" style="border:none; padding:0; margin-bottom:0.35rem;">Editorial + Sumário</p>
+        <p class="article-title">Editorial e Sumário — Volume 1</p>
+        <p class="article-authors">Dione de Rezende · Verônica Bender Haydu</p>
+        <p class="article-institution">Depto. de Psicologia Geral e Análise do Comportamento — UEL</p>
+        <div style="margin-top:0.75rem; display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap;">
+          <span class="page-badge">p. 1–5 · arquivo: 01.pdf</span>
+          <a href="artigos/vol1/01.pdf" class="pdf-btn" download>
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+            PDF
+          </a>
+        </div>
+      </div>
+
+      <p class="articles-section-label" style="margin-top:1.5rem;">Artigos</p>
+      <div class="article-list" id="list-vol-1">
+
+        <div class="article-item" data-searchable="O Psicólogo e sua Torre de Babel Rodolpho Carbonari Sant'Anna UEL análise comportamento psicologia dialetos andares proposições">
+          <span class="article-num">01</span>
+          <div class="article-body">
+            <p class="article-title">O Psicólogo e sua Torre de Babel</p>
+            <p class="article-authors">Rodolpho Carbonari Sant'Anna</p>
+            <p class="article-institution">Depto. de Psicologia Geral e Análise do Comportamento — UEL, Londrina, PR</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 6–10 · 02.pdf</span>
+            <a href="artigos/vol1/02.pdf" class="pdf-btn" download>
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Behaviorismo Radical Visão do Homem Integral Ligia Maria Castro Marcondes Machado USP São Paulo cognitivismo mente terapias corpo introspecção Skinner">
+          <span class="article-num">02</span>
+          <div class="article-body">
+            <p class="article-title">Behaviorismo Radical: Uma Visão do Homem Integral</p>
+            <p class="article-authors">Ligia Maria de Castro Marcondes Machado</p>
+            <p class="article-institution">Depto. de Psicologia Experimental — USP, São Paulo</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 11–19 · 03.pdf</span>
+            <a href="artigos/vol1/03.pdf" class="pdf-btn" download>
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Relações Psicologia Psicofarmacologia Psicofarmacoterapia Ari Bassi Nascimento UEL New Jersey drogas SNC farmacologia comportamento clínica">
+          <span class="article-num">03</span>
+          <div class="article-body">
+            <p class="article-title">As Relações entre a Psicologia e a Psicofarmacologia</p>
+            <p class="article-authors">Ari Bassi do Nascimento</p>
+            <p class="article-institution">Depto. de Psicologia Geral e Análise do Comportamento — UEL, Londrina, PR · New Jersey University — U.S.A.</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 20–23 · 04.pdf</span>
+            <a href="artigos/vol1/04.pdf" class="pdf-btn" download>
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Por que Estudar Comportamento Animal Psicologia Carlos Eduardo Costa UEL Darwin Skinner Watson infra-humanos ratos laboratório experimental evolução seleção natural">
+          <span class="article-num">04</span>
+          <div class="article-body">
+            <p class="article-title">Por que Estudar o Comportamento Animal em Psicologia?</p>
+            <p class="article-authors">Carlos Eduardo Costa</p>
+            <p class="article-institution">Depto. de Psicologia Geral e Análise do Comportamento — UEL, Londrina, PR</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 24–29 · 05.pdf</span>
+            <a href="artigos/vol1/05.pdf" class="pdf-btn" download>
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Efeitos Punição Taxa Resposta Alternação Esquema Concorrente Reforçamento Simétrico Universitários Dione Rezende Angélia Dalla Torre Maria Ester Falaschi Maristela Boldo Verônica Haydu UEL razão fixa FR escolha perda pontos">
+          <span class="article-num">05</span>
+          <div class="article-body">
+            <p class="article-title">Efeitos da Punição sobre a Taxa de Resposta de Alternação em Esquema Concorrente de Reforçamento Simétrico em Universitários</p>
+            <p class="article-authors">Dione de Rezende · Angélia Dalla Torre · Maria Ester Falaschi · Maristela Ap. Boldo · Verônica B. Haydu</p>
+            <p class="article-institution">Depto. de Psicologia Geral e Análise do Comportamento — UEL, Londrina, PR</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 30–41 · 06.pdf</span>
+            <a href="artigos/vol1/06.pdf" class="pdf-btn" download>
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="articles-section-label" style="margin-top:2rem;">Resumos de Pesquisa (p. 42–56)</p>
+      <div class="article-list" id="list-vol-1-resumos">
+
+        <div class="article-item" data-searchable="Efeitos Densidade Reforço Taxa Resposta Escolha Reforçada Concorrentemente Universitários Dione Rezende Fabiana Abdalla Fernanda Oliveira Milena Crastelo Rita Machado Verônica Haydu razão fixa preferência">
+          <span class="article-num">R01</span>
+          <div class="article-body">
+            <p class="article-title">Efeitos da Densidade de Reforço sobre a Taxa de Resposta de Escolha Reforçada Concorrentemente em Universitários</p>
+            <p class="article-authors">Dione de Rezende · Fabiana P. M. Abdalla · Fernanda Cristina F. de Oliveira · Milena V. Crastelo · Rita de Cássia S. Machado · Verônica B. Haydu</p>
+            <p class="article-institution">Depto. de Psicologia Geral e Análise do Comportamento — UEL, Londrina, PR</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 42 · 07.pdf</span>
+            <a href="artigos/vol1/07.pdf" class="pdf-btn" download>
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Estímulo Aversivo Sinalizador Ocorrência Reforço Dione Rezende Cristine Zucoloto Eleniara Franco Renata Silva Rita Aragão Rita Lima Sílvia Gabassi Verônica Haydu choque elétrico ratos esquema múltiplo VR VI discriminativo">
+          <span class="article-num">R02</span>
+          <div class="article-body">
+            <p class="article-title">Estímulo Aversivo como Sinalizador de Ocorrência de Reforço</p>
+            <p class="article-authors">Dione de Rezende · Cristine E. C. Zucoloto · Eleniara N. Franco · Renata M. da Silva · Rita M. Aragão · Rita M. Lima · Sílvia E. Gabassi · Verônica B. Haydu</p>
+            <p class="article-institution">Depto. de Psicologia Geral e Análise do Comportamento — UEL, Londrina, PR</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 43 · 08.pdf</span>
+            <a href="artigos/vol1/08.pdf" class="pdf-btn" download>
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Treino Discriminativo Comparação Procedimentos Extinção Respostas S- Verônica Haydu Ana Paula Tanno Débora Sousa Ingrid Ausec Márcia Maggio Sara Melo Sueleni Zambotti Dione Rezende ratos Skinner FUNBEC SD sem erro">
+          <span class="article-num">R03</span>
+          <div class="article-body">
+            <p class="article-title">Treino Discriminativo: Comparação entre Procedimentos que Requerem ou Não Extinção das Respostas diante do S⁻</p>
+            <p class="article-authors">Verônica B. Haydu · Ana Paula Tanno · Débora M. de Sousa · Ingrid Caroline de O. Ausec · Márcia Maria P. Maggio · Sara Maria de Melo · Sueleni Zambotti · Dione de Rezende</p>
+            <p class="article-institution">Depto. de Psicologia Geral e Análise do Comportamento — UEL, Londrina, PR</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 44 · 09.pdf</span>
+            <a href="artigos/vol1/09.pdf" class="pdf-btn" download>
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Polidipsia Induzida Contingência Ratos Verônica Haydu Adilson Andrade Ariane Buranello Fabiana Tutida Juliana Liberatti Reginaldo Nascimento Renata Montemor Dione Rezende beber água FT 90 esquema FUNBEC pellets">
+          <span class="article-num">R04</span>
+          <div class="article-body">
+            <p class="article-title">Polidipsia Induzida por Contingência em Ratos</p>
+            <p class="article-authors">Verônica B. Haydu · Adilson de Andrade · Ariane S. Buranello · Fabiana Tutida · Juliana Liberatti · Reginaldo Henrique P. do Nascimento · Renata de Oliveira Montemor · Dione de Rezende</p>
+            <p class="article-institution">Depto. de Psicologia Geral e Análise do Comportamento — UEL, Londrina, PR</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 45 · 10.pdf</span>
+            <a href="artigos/vol1/10.pdf" class="pdf-btn" download>
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Efeitos Punição Resposta Escolha Esquema Maior Densidade Reforço Universitários Dione Rezende Patrícia Kuman Thaty Erichsen Elder Polizeli Luis Eduardo Batisptela Verônica Haydu assimétrico preferência FR3 intermitente">
+          <span class="article-num">R05</span>
+          <div class="article-body">
+            <p class="article-title">Efeitos da Punição sobre a Resposta de Escolha do Esquema com Maior Densidade de Reforço em Universitários</p>
+            <p class="article-authors">Dione de Rezende · Patrícia Kuman · Thaty V. Erichsen · Elder G. Polizeli · Luis Eduardo Batisptela · Verônica B. Haydu</p>
+            <p class="article-institution">Depto. de Psicologia Geral e Análise do Comportamento — UEL, Londrina, PR</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 46 · 11.pdf</span>
+            <a href="artigos/vol1/11.pdf" class="pdf-btn" download>
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Comparação Três Métodos Extinção Comportamento labirinto T duplo Dione Rezende Adriana Caroli Andréa Moraes Gabriela Araújo Gisane Albertoni Verônica Haydu ratos punição obstáculo choque elétrico recuperação">
+          <span class="article-num">R06</span>
+          <div class="article-body">
+            <p class="article-title">Comparação entre Três Métodos de Extinção de Comportamento</p>
+            <p class="article-authors">Dione de Rezende · Adriana Caroli · Andréa C. de Moraes · Gabriela M. Araújo · Gisane B. Albertoni · Verônica B. Haydu</p>
+            <p class="article-institution">Depto. de Psicologia Geral e Análise do Comportamento — UEL, Londrina, PR</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 47 · 12.pdf</span>
+            <a href="artigos/vol1/12.pdf" class="pdf-btn" download>
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Efeitos Punição Extinção Taxa Resposta Pressão Barra Dione Rezende Ana Cláudia Trevisan André Souza Cláudia Medeiros Cristina Rodrigues Gisele Martins Joseane Bonfim Verônica Haydu ratos choque VI 60 recuperação imediato">
+          <span class="article-num">R07</span>
+          <div class="article-body">
+            <p class="article-title">Efeitos da Punição e Extinção sobre a Taxa da Resposta de Pressão à Barra</p>
+            <p class="article-authors">Dione de Rezende · Ana Cláudia C. Trevisan · André Ricardo de Souza · Cláudia C. Medeiros · Cristina Rosa Rodrigues · Gisele C. Martins · Joseane Aparecida O. Bonfim · Verônica B. Haydu</p>
+            <p class="article-institution">Depto. de Psicologia Geral e Análise do Comportamento — UEL, Londrina, PR</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 48 · 13.pdf</span>
+            <a href="artigos/vol1/13.pdf" class="pdf-btn" download>
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Comparação Dois Procedimentos Aquisição Cadeia Comportamental Ratos Verônica Haydu Andréia Silva Carla Pagnossim Cecilia Hosomi Jacqueline Alcantara Lilian Gava Luciana Silva Dione Rezende frente trás argola barra FUNBEC">
+          <span class="article-num">R08</span>
+          <div class="article-body">
+            <p class="article-title">Comparação de Dois Procedimentos na Aquisição de uma Cadeia Comportamental em Ratos</p>
+            <p class="article-authors">Verônica B. Haydu · Andréia P. da Silva · Carla Maria C. Pagnossim · Cecilia M. Hosomi · Jacqueline Q. Alcantara · Lilian Fernanda M. Gava · Luciana S. da Silva · Dione de Rezende</p>
+            <p class="article-institution">Depto. de Psicologia Geral e Análise do Comportamento — UEL, Londrina, PR</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 49 · 14.pdf</span>
+            <a href="artigos/vol1/14.pdf" class="pdf-btn" download>
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Treino Discriminação Duas Condições Estímulos Luminosos Verônica Haydu Andréa Rodrigues Gilson Mores Dione Rezende rato FUNBEC VR FR luz escuro índice discriminação 95%">
+          <span class="article-num">R09</span>
+          <div class="article-body">
+            <p class="article-title">Treino de Discriminação com Duas Condições de Estímulos Luminosos</p>
+            <p class="article-authors">Verônica B. Haydu · Andréa S. Rodrigues · Gilson V. de Mores Jr. · Dione de Rezende</p>
+            <p class="article-institution">Depto. de Psicologia Geral e Análise do Comportamento — UEL, Londrina, PR</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 50 · 15.pdf</span>
+            <a href="artigos/vol1/15.pdf" class="pdf-btn" download>
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Aquisição Manutenção Resposta Esquiva Ratos Dione Rezende Leila Shiotuki Luciana Lima Marjory Calefe Verônica Haydu Wistar caixa Mowrer choque elétrico latência compartimento operação estabelecedora">
+          <span class="article-num">R10</span>
+          <div class="article-body">
+            <p class="article-title">Aquisição e Manutenção da Resposta de Esquiva em Ratos</p>
+            <p class="article-authors">Dione de Rezende · Leila J. Shiotuki · Luciana L. de Lima · Marjory Calefe · Verônica B. Haydu</p>
+            <p class="article-institution">Depto. de Psicologia Geral e Análise do Comportamento — UEL, Londrina, PR</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 51 · 16.pdf</span>
+            <a href="artigos/vol1/16.pdf" class="pdf-btn" download>
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Discriminação Presença Ausência Luz Ratos Verônica Haydu Oswaldo Castagna Filho Sara Toninato Uedinei Carvalho Dione Rezende Wistar FR 5 constância taxa respostas SD SA">
+          <span class="article-num">R11</span>
+          <div class="article-body">
+            <p class="article-title">Discriminação entre Presença e Ausência de Luz em Ratos</p>
+            <p class="article-authors">Verônica B. Haydu · Oswaldo Castagna Filho · Sara Gladys Toninato · Uedinei A. Carvalho · Dione de Rezende</p>
+            <p class="article-institution">Depto. de Psicologia Geral e Análise do Comportamento — UEL, Londrina, PR</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 52 · 17.pdf</span>
+            <a href="artigos/vol1/17.pdf" class="pdf-btn" download>
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Generalização Estímulos Luminosos Ratos Verônica Haydu Hellen Furtado Jane Portella Karen Gumiero Karina Silva Luciana Santos Monica Bueno Dione Rezende Wistar FUNBEC VI 60 gradiente extinção intensidade luz treino teste">
+          <span class="article-num">R12</span>
+          <div class="article-body">
+            <p class="article-title">Generalização de Estímulos Luminosos em Ratos</p>
+            <p class="article-authors">Verônica B. Haydu · Hellen Patricia P. Furtado · Jane Carla Portella · Karen Andrea M. Gumiero · Karina G. da Silva · Luciana B. dos Santos · Monica M. Bueno · Dione de Rezende</p>
+            <p class="article-institution">Depto. de Psicologia Geral e Análise do Comportamento — UEL, Londrina, PR</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 53 · 18.pdf</span>
+            <a href="artigos/vol1/18.pdf" class="pdf-btn" download>
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Efeitos Diferentes Graus Privação Água Taxa Resposta Pressão Barra Dione Rezende Ana Paula Troncoso Verônica Haydu rato Wistar FUNBEC VI 30 CRF 24h 48h 72h motivação">
+          <span class="article-num">R13</span>
+          <div class="article-body">
+            <p class="article-title">Efeitos de Diferentes Graus de Privação de Água sobre a Taxa de Resposta de Pressão à Barra</p>
+            <p class="article-authors">Dione de Rezende · Ana Paula Troncoso · Verônica B. Haydu</p>
+            <p class="article-institution">Depto. de Psicologia Geral e Análise do Comportamento — UEL, Londrina, PR</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 54 · 19.pdf</span>
+            <a href="artigos/vol1/19.pdf" class="pdf-btn" download>
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Avaliação Ansiedade Pré-Vestibulandos 3 Ano Colegial Cursinho Escola Particular Áurea Ota Giovanna Viana Márcia Gon UEL inventário Estado-Traço vestibular família situação financeira confiança">
+          <span class="article-num">R14</span>
+          <div class="article-body">
+            <p class="article-title">Avaliação de Ansiedade em Pré-Vestibulandos do 3º Ano Colegial e Cursinho de uma Escola Particular</p>
+            <p class="article-authors">Áurea E. Ota · Giovanna K. Viana · Márcia C. C. Gon</p>
+            <p class="article-institution">Depto. de Psicologia Geral e Análise do Comportamento — UEL, Londrina, PR</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 55 · 20.pdf</span>
+            <a href="artigos/vol1/20.pdf" class="pdf-btn" download>
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Psicoterapia Grupo Autocontrole Tratamento Obesidade UEL comportamento alimentar controle peso emagrecimento">
+          <span class="article-num">R15</span>
+          <div class="article-body">
+            <p class="article-title">Psicoterapia de Grupo: Autocontrole no Tratamento da Obesidade</p>
+            <p class="article-authors">UEL — Londrina, PR</p>
+            <p class="article-institution">Depto. de Psicologia Geral e Análise do Comportamento — UEL, Londrina, PR</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 56 · 21.pdf</span>
+            <a href="artigos/vol1/21.pdf" class="pdf-btn" download>
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="articles-section-label" style="margin-top:2rem;">Normas e Instruções</p>
+      <div class="editorial-item" style="margin-top:0.5rem;">
+        <p class="article-title">Normas para Publicação</p>
+        <p class="article-authors">Torre de Babel — Volume 1, 1994</p>
+        <div style="margin-top:0.75rem; display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap;">
+          <span class="page-badge">arquivo: 22.pdf</span>
+          <a href="artigos/vol1/22.pdf" class="pdf-btn" download>
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+            PDF
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─ VOL 2 ─ -->
+    <div id="vol-2" class="volume-panel">
+      <div class="volume-header">
+        <div class="volume-cover-placeholder vol2-cover">
+          <div class="vol2-cover-inner">
+            <div class="title-big">TORRE<br/>DE BABEL</div>
+            <div class="psi-bg">Ψ</div>
+            <div class="vol-info"><span>VOLUME 2</span><span>SET. 1995</span></div>
+          </div>
+        </div>
+        <div class="volume-info">
+          <h3>Volume 2 — Setembro 1995</h3>
+          <p class="volume-byline">Torre de Babel: Refl.Pesq.Psic. · v.2 · p.7–113 · Set. 1995 · Londrina, PR · Editora UEL</p>
+          <p>Com o segundo volume, a revista muda de subtítulo para <em>Reflexões e Pesquisa em Psicologia</em>, ampliando seu escopo para além da Análise do Comportamento e tornando-se uma publicação de circulação nacional. A capa verde vibrante com o símbolo Ψ marca esta nova fase. O volume inclui 8 artigos originais abrangendo análise do comportamento, educação especial, riscos ambientais e processamento de informação.</p>
+          <div class="volume-tags">
+            <span class="tag">Análise do Comportamento Aplicada</span>
+            <span class="tag">Educação Especial</span>
+            <span class="tag">Riscos Ambientais</span>
+            <span class="tag">NOMOS V3</span>
+            <span class="tag">Relações Funcionais</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="editorial-item">
+        <p class="articles-section-label" style="border:none; padding:0; margin-bottom:0.35rem;">Editorial</p>
+        <p class="article-title">Editorial — Volume 2</p>
+        <p class="article-authors">Verônica Bender Haydu · Dione de Rezende</p>
+        <div style="margin-top:0.75rem; display:flex; gap:0.75rem; align-items:center;">
+          <span class="page-badge">p. 5</span>
+          <a href="pdfs/v2/00_editorial_haydu_rezende_1995.pdf" class="pdf-btn" download>
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+            PDF
+          </a>
+        </div>
+      </div>
+
+      <p class="articles-section-label" style="margin-top:1.5rem;">Artigos</p>
+      <div class="article-list" id="list-vol-2">
+
+        <div class="article-item" data-searchable="Riscos Ambientais Criança Reflexões Proposta Intervenção Preventiva Famílias Maria Aparecida Trevisan Zamberlan Renata Grossi Cynthia Borges Moura Elias Lima Áurea Ota Vanessa Tomaz Márcio Pinheiro Gislaine Andrade Maristela Boldo UEL">
+          <span class="article-num">01</span>
+          <div class="article-body">
+            <p class="article-title">Riscos Ambientais à Criança: reflexões para a proposta de intervenção preventiva junto a famílias</p>
+            <p class="article-authors">Maria Aparecida Trevisan Zamberlan · Renata Grossi · Cynthia Borges de Moura · Elias do Carmo Lima · Áurea Emi Ota · Vanessa Alessandra Tomaz · Márcio Aparecido Pinheiro · Gislaine Aparecida de Andrade · Maristela Aparecida Boldo</p>
+            <p class="article-institution">Universidade Estadual de Londrina</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 7–30</span>
+            <a href="pdfs/v2/01_zamberlan_et_al_1995_riscos_ambientais_crianca.pdf" class="pdf-btn" download>
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Relação Funcional Noção Explicação Jocelaine Martins Silveira Rodolpho Carbonari Sant'Anna UEL">
+          <span class="article-num">02</span>
+          <div class="article-body">
+            <p class="article-title">A Relação Funcional como uma Noção de Explicação</p>
+            <p class="article-authors">Jocelaine Martins da Silveira · Rodolpho Carbonari Sant'Anna</p>
+            <p class="article-institution">Universidade Estadual de Londrina</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 31–34</span>
+            <a href="pdfs/v2/02_silveira_santanna_1995_relacao_funcional_explicacao.pdf" class="pdf-btn" download>
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Reflexões Análise Experimental Comportamento AEC Análise Comportamento Aplicada Clínica Carlos Eduardo Costa UEL">
+          <span class="article-num">03</span>
+          <div class="article-body">
+            <p class="article-title">Reflexões sobre a Análise Experimental do Comportamento e Análise do Comportamento Aplicada à Clínica</p>
+            <p class="article-authors">Carlos Eduardo Costa</p>
+            <p class="article-institution">Universidade Estadual de Londrina</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 35–40</span>
+            <a href="pdfs/v2/03_costa_1995_aec_aca_clinica.pdf" class="pdf-btn" download>
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Educação Especial Reflexão Normalização Integração Pessoa Portadora Necessidades Educacionais Especiais PPNEE Renata Grossi UEL">
+          <span class="article-num">04</span>
+          <div class="article-body">
+            <p class="article-title">Educação Especial: uma reflexão sobre o processo de normalização e de integração da pessoa portadora de necessidades educacionais especiais (PPNEE)</p>
+            <p class="article-authors">Renata Grossi</p>
+            <p class="article-institution">Universidade Estadual de Londrina</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 41–46</span>
+            <a href="pdfs/v2/04_grossi_1995_educacao_especial_normalizacao.pdf" class="pdf-btn" download>
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Resolução Problemas NOMOS V31 efeito grau dificuldade educação regras learning set desempenho subsequente Fernando César Capovilla Verônica Bender Haydu Carlos Eduardo Costa Josiane Cecília Luzia Marcia Pires Andrade Luciana Siqueira Silva Elizeu Macedo Marcelo Duduchi Alessandra Seabra Capovilla USP São Paulo UEL">
+          <span class="article-num">05</span>
+          <div class="article-body">
+            <p class="article-title">Resolução de Problemas em NOMOS V31: efeito do grau de dificuldade de educação de regras durante o <em>learning set</em> sobre o desempenho subsequente</p>
+            <p class="article-authors">Fernando César Capovilla · Verônica Bender Haydu · Carlos Eduardo Costa · Josiane Cecília Luzia · Marcia Pires de Andrade · Luciana Siqueira da Silva · Elizeu C. Macedo · Marcelo Duduchi · Alessandra G. Seabra Capovilla</p>
+            <p class="article-institution">Universidade de São Paulo · Universidade Estadual de Londrina</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 47–68</span>
+            <a href="pdfs/v2/05_capovilla_et_al_1995_nomos_v31_resolucao_problemas.pdf" class="pdf-btn" download>
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Educação Regras NOMOS V3 condições resolução silenciosa verbalizada interferência diferentes graus dificuldade educação Verônica Bender Haydu Fernando César Capovilla Ana Nora Jacob Naiene Pimentel Rosimary Lima Guilherme Eliseu Macedo Marcello Duduchi Alessandra Seabra Capovilla UEL USP">
+          <span class="article-num">06</span>
+          <div class="article-body">
+            <p class="article-title">Educação de Regras em NOMOS V3: efeito de condições de resolução silenciosa, verbalizada e sob interferência, sob diferentes graus de dificuldade de educação</p>
+            <p class="article-authors">Verônica Bender Haydu · Fernando César Capovilla · Ana Nora Jacob · Naiene S. Pimentel · Rosimary Lima Guilherme · Eliseu C. Macedo · Marcello Duduchi · Alessandra G. Seabra Capovilla</p>
+            <p class="article-institution">UEL · Universidade de São Paulo</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 69–90</span>
+            <a href="pdfs/v2/06_haydu_et_al_1995_nomos_v3_educacao_regras.pdf" class="pdf-btn" download>
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Uma Ciência Comportamento Psicologia Verônica Bender Haydu Dione Rezende UEL">
+          <span class="article-num">07</span>
+          <div class="article-body">
+            <p class="article-title">Uma Ciência do Comportamento: Psicologia</p>
+            <p class="article-authors">Verônica Bender Haydu · Dione de Rezende</p>
+            <p class="article-institution">Universidade Estadual de Londrina</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 91–108</span>
+            <a href="pdfs/v2/07_haydu_rezende_1995_ciencia_comportamento_psicologia.pdf" class="pdf-btn" download>
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+        <div class="article-item" data-searchable="Práticas Psicossociais Cuidados Ambientes Familiares Baixa Renda Londrina PR Maria Aparecida Trevizan Zanberlan UEL">
+          <span class="article-num">08</span>
+          <div class="article-body">
+            <p class="article-title">Práticas Psicossociais de Cuidados em Ambientes Familiares de Baixa Renda de Londrina – PR</p>
+            <p class="article-authors">Maria Aparecida Trevizan Zanberlan</p>
+            <p class="article-institution">Universidade Estadual de Londrina</p>
+          </div>
+          <div class="article-meta">
+            <span class="page-badge">p. 109–110</span>
+            <a href="pdfs/v2/08_zanberlan_1995_praticas_psicossociais_familias_londrina.pdf" class="pdf-btn" download>
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              PDF
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ─ VOL 3 ─ -->
+    <div id="vol-3" class="volume-panel">
+      <div class="volume-header">
+        <div class="volume-cover-placeholder vol3-cover">
+          <div class="vol3-left"><div class="psi">Ψ</div></div>
+          <div class="vol3-right">
+            <div class="torre-text">TORRE<br/>DE BABEL</div>
+            <div class="issn">ISSN 1414-0551</div>
+            <div style="margin-top:auto; font-family:'Space Mono',monospace; font-size:0.38rem; color:#162B1E; line-height:1.4;">
+              Reflexões e Pesquisa<br/>em Psicologia<br/>UEL · v.3 · Set.1996
+            </div>
+          </div>
+        </div>
+        <div class="volume-info">
+          <h3>Volume 3 — Setembro 1996</h3>
+          <p class="volume-byline">Torre de Babel: Refl.Pesq.Psic. · ISSN 1414-0551 · v.3 · p.1–103 · Set. 1996 · Londrina, PR · Editora UEL</p>
+          <p>O terceiro volume consolida a identidade visual da revista — o design bicolor verde-escuro/branco com o símbolo Ψ em destaque. Com ISSN registrado (1414-0551), a publicação alcança reconhecimento oficial como periódico científico. Os PDFs dos artigos deste volume estão sendo processados para inclusão neste arquivo.</p>
+          <div class="volume-tags">
+            <span class="tag">ISSN 1414-0551</span>
+            <span class="tag">Circulação Nacional</span>
+            <span class="tag">Editora UEL</span>
+          </div>
+        </div>
+      </div>
+      <div class="article-list" id="list-vol-3">
+        <div class="article-item" data-searchable="volume 3 1996 em processamento">
+          <span class="article-num">—</span>
+          <div class="article-body">
+            <p class="article-title" style="font-style:italic; color:var(--muted);">Artigos do Volume 3 em processamento</p>
+            <p class="article-authors">Os PDFs individuais deste volume serão adicionados em breve. Consulte o arquivo completo do volume enquanto isso.</p>
+          </div>
+          <div class="article-meta">
+            <a href="pdfs/v3/volume3_completo_1996.pdf" class="pdf-btn" download>
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              Volume Completo
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─ VOL 4 ─ -->
+    <div id="vol-4" class="volume-panel">
+      <div class="volume-header">
+        <div class="volume-cover-placeholder vol3-cover">
+          <div class="vol3-left"><div class="psi">Ψ</div></div>
+          <div class="vol3-right">
+            <div class="torre-text">TORRE<br/>DE BABEL</div>
+            <div class="issn">ISSN 1414-0551</div>
+            <div style="margin-top:auto; font-family:'Space Mono',monospace; font-size:0.38rem; color:#162B1E; line-height:1.4;">
+              Reflexões e Pesquisa<br/>em Psicologia<br/>UEL · v.4 · 1997
+            </div>
+          </div>
+        </div>
+        <div class="volume-info">
+          <h3>Volume 4 — 1997</h3>
+          <p class="volume-byline">Torre de Babel: Refl.Pesq.Psic. · ISSN 1414-0551 · v.4 · 1997 · Londrina, PR · Editora UEL</p>
+          <p>O quarto volume da revista. Os PDFs dos artigos deste volume estão sendo processados para inclusão neste arquivo digital.</p>
+        </div>
+      </div>
+      <div class="article-list" id="list-vol-4">
+        <div class="article-item" data-searchable="volume 4 1997 em processamento">
+          <span class="article-num">—</span>
+          <div class="article-body">
+            <p class="article-title" style="font-style:italic; color:var(--muted);">Artigos do Volume 4 em processamento</p>
+            <p class="article-authors">Os PDFs individuais deste volume serão adicionados em breve.</p>
+          </div>
+          <div class="article-meta">
+            <a href="pdfs/v4/volume4_completo_1997.pdf" class="pdf-btn" download>
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              Volume Completo
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─ VOL 5 ─ -->
+    <div id="vol-5" class="volume-panel">
+      <div class="volume-header">
+        <div class="volume-cover-placeholder vol3-cover">
+          <div class="vol3-left"><div class="psi">Ψ</div></div>
+          <div class="vol3-right">
+            <div class="torre-text">TORRE<br/>DE BABEL</div>
+            <div class="issn">ISSN 1414-0551</div>
+            <div style="margin-top:auto; font-family:'Space Mono',monospace; font-size:0.38rem; color:#162B1E; line-height:1.4;">
+              Reflexões e Pesquisa<br/>em Psicologia<br/>UEL · v.5 · 1998
+            </div>
+          </div>
+        </div>
+        <div class="volume-info">
+          <h3>Volume 5 — 1998</h3>
+          <p class="volume-byline">Torre de Babel: Refl.Pesq.Psic. · ISSN 1414-0551 · v.5 · 1998 · Londrina, PR · Editora UEL</p>
+          <p>O último volume da revista, encerrando a trajetória da publicação. Os PDFs dos artigos deste volume estão sendo processados para inclusão neste arquivo.</p>
+        </div>
+      </div>
+      <div class="article-list" id="list-vol-5">
+        <div class="article-item" data-searchable="volume 5 1998 em processamento">
+          <span class="article-num">—</span>
+          <div class="article-body">
+            <p class="article-title" style="font-style:italic; color:var(--muted);">Artigos do Volume 5 em processamento</p>
+            <p class="article-authors">Os PDFs individuais deste volume serão adicionados em breve.</p>
+          </div>
+          <div class="article-meta">
+            <a href="pdfs/v5/volume5_completo_1998.pdf" class="pdf-btn" download>
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+              Volume Completo
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="no-results" id="no-results">Nenhum artigo encontrado para "<span id="search-term-display"></span>"</div>
+  </div>
+</section>
+
+<!-- ═══ QUOTE 2 ═══ -->
+<div class="quote-block-2">
+  <div class="quote-2-inner">
+    <div class="quote-2-block">
+      <p class="label">Do editorial — Volume 1, 1994</p>
+      <blockquote>A presente revista surgiu a partir da idéia de publicar os resumos de trabalhos desenvolvidos pelos alunos do curso de Psicologia do Departamento de Psicologia Geral e Análise do Comportamento. Esta idéia foi bem aceita, mas constatamos que existiam diversos artigos teóricos e experimentais produzidos por docentes e alunos de nossa instituição que mereciam também ser publicados.</blockquote>
+      <p class="attr">— Dione de Rezende &amp; Verônica Bender Haydu<br/>Editoras, Torre de Babel v.1, 1994</p>
+    </div>
+    <div class="quote-2-block">
+      <p class="label">Do editorial — Volume 2, 1995</p>
+      <blockquote>Desta forma passou-se a sonhar com uma revista específica na área de Análise do Comportamento, entretanto este sonho foi interrompido pelas inúmeras sugestões recebidas de colegas da UEL e de outras instituições, para que a revista não se restringisse a artigos desta área. Assim, o conselho editorial concordou em alterar o objetivo da revista.</blockquote>
+      <p class="attr">— Verônica Bender Haydu &amp; Dione de Rezende<br/>Editoras, Torre de Babel v.2, 1995</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ EQUIPE ═══ -->
+<section id="equipe">
+  <div class="container">
+    <div class="section-label" style="color:rgba(61,214,140,0.5);">Responsáveis pela Publicação</div>
+    <h2 class="section-title section-title-light">Equipe Editorial</h2>
+    <div class="equipe-grid">
+      <div class="equipe-card">
+        <p class="equipe-role">Editora / Coordenadora</p>
+        <p class="equipe-name">Dra. Dione de Rezende</p>
+        <p class="equipe-inst">UEL — Londrina, PR</p>
+      </div>
+      <div class="equipe-card">
+        <p class="equipe-role">Editora / Coordenadora</p>
+        <p class="equipe-name">Dra. Verônica Bender Haydu</p>
+        <p class="equipe-inst">UEL — Londrina, PR (Chefe do Depto., v.2)</p>
+      </div>
+      <div class="equipe-card">
+        <p class="equipe-role">Conselho Editorial</p>
+        <p class="equipe-name">Dra. Carmen Garcia de Almeida</p>
+        <p class="equipe-inst">UEL</p>
+      </div>
+      <div class="equipe-card">
+        <p class="equipe-role">Conselho Editorial</p>
+        <p class="equipe-name">Dra. Elsa Maria Mendes Pessoa Pullin</p>
+        <p class="equipe-inst">UNOESTE / UEL</p>
+      </div>
+      <div class="equipe-card">
+        <p class="equipe-role">Conselho Editorial</p>
+        <p class="equipe-name">Dra. Ligia Maria de Castro Marcondes Machado</p>
+        <p class="equipe-inst">USP — São Paulo</p>
+      </div>
+      <div class="equipe-card">
+        <p class="equipe-role">Conselho Editorial</p>
+        <p class="equipe-name">Dra. Heloísa Helena Nunes Sant'Anna</p>
+        <p class="equipe-inst">UEL</p>
+      </div>
+      <div class="equipe-card">
+        <p class="equipe-role">Conselho Editorial</p>
+        <p class="equipe-name">Dr. Fernando Cesar Capovilla</p>
+        <p class="equipe-inst">USP — São Paulo</p>
+      </div>
+      <div class="equipe-card">
+        <p class="equipe-role">Conselho Editorial</p>
+        <p class="equipe-name">Dra. Paula Inez Cunha Gomide</p>
+        <p class="equipe-inst">UFP</p>
+      </div>
+      <div class="equipe-card">
+        <p class="equipe-role">Conselho Editorial</p>
+        <p class="equipe-name">Profa. Paula Zedu Alliprandini</p>
+        <p class="equipe-inst">UNESP — Assis</p>
+      </div>
+      <div class="equipe-card">
+        <p class="equipe-role">Conselho Editorial</p>
+        <p class="equipe-name">Prof. Rodolpho Carbonari Sant'Anna</p>
+        <p class="equipe-inst">UEL</p>
+      </div>
+      <div class="equipe-card">
+        <p class="equipe-role">Conselho Editorial (v.2+)</p>
+        <p class="equipe-name">Livre Doc. José Lino Oliveira Bueno</p>
+        <p class="equipe-inst">USP — Ribeirão Preto</p>
+      </div>
+      <div class="equipe-card">
+        <p class="equipe-role">Conselho Editorial (v.2+)</p>
+        <p class="equipe-name">Prof. Solange Ferreira da Silva</p>
+        <p class="equipe-inst">UEL</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RESGATE ═══ -->
+<section id="resgate" style="background: var(--forest); padding: 5rem 0;">
+  <div class="container">
+    <div class="section-label" style="color:rgba(61,214,140,0.5);">Quem digitalizou este acervo</div>
+    <h2 class="section-title" style="color:var(--cream);">Um Resgate Histórico<br/>do CRIACOM</h2>
+    <p style="margin-top:1rem; font-size:1.1rem; color:rgba(244,239,228,0.65); font-family:'EB Garamond',serif; font-style:italic; max-width:58ch; line-height:1.65;">
+      Um laboratório do PPGAC-UEL — Programa de Pós-Graduação em Análise do Comportamento da Universidade Estadual de Londrina.
+    </p>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:3.5rem; align-items:stretch;">
+
+      <!-- CRIACOM card -->
+      <div style="background:rgba(255,255,255,0.05); border:1px solid var(--border); padding:2.5rem; display:flex; flex-direction:column; gap:1.5rem;">
+        <div style="background:#F4EFE4; border-radius:4px; padding:1.5rem 2rem; display:flex; align-items:center; justify-content:center; min-height:140px;">
+          <img src="img/logo.png" alt="CRIACOM — Grupo de Pesquisa em Criatividade, Inovação, Cognição e Comportamento"
+               style="max-width:220px; max-height:120px; width:100%; height:auto; object-fit:contain;" />
+        </div>
+        <div>
+          <p style="font-family:'Syne',sans-serif; font-size:1.25rem; font-weight:800; color:var(--cream); margin-bottom:0.4rem;">CRIACOM</p>
+          <p style="font-family:'Space Mono',monospace; font-size:0.6rem; color:var(--mint); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:1rem;">Grupo de Pesquisa em Criatividade, Inovação, Cognição e Comportamento</p>
+          <p style="font-family:'EB Garamond',serif; font-size:1rem; color:rgba(244,239,228,0.7); line-height:1.65;">
+            O CRIACOM é responsável pela digitalização, curadoria e disponibilização deste acervo em acesso aberto. A iniciativa busca preservar a produção científica histórica da Análise do Comportamento no Brasil, tornando acessível um patrimônio que permaneceu em formato exclusivamente impresso por mais de duas décadas.
+          </p>
+        </div>
+        <div style="margin-top:auto;">
+          <a href="https://criacom.github.io/lab/" target="_blank" rel="noopener"
+             style="display:inline-flex; align-items:center; gap:0.5rem;
+                    background:var(--mint); color:var(--forest);
+                    font-family:'Space Mono',monospace; font-size:0.68rem; font-weight:700;
+                    letter-spacing:0.1em; text-transform:uppercase;
+                    padding:0.75rem 1.4rem; border-radius:3px; text-decoration:none;
+                    transition:background 0.2s;">
+            criacom.github.io/lab
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- PPGAC card -->
+      <div style="background:rgba(255,255,255,0.05); border:1px solid var(--border); padding:2.5rem; display:flex; flex-direction:column; gap:1.5rem;">
+        <div style="background:#ffffff; border-radius:4px; padding:1.5rem 2rem; display:flex; align-items:center; justify-content:center; min-height:140px;">
+          <img src="img/logo-ppgac.png" alt="PPGAC — Programa de Pós-Graduação em Análise do Comportamento — UEL"
+               style="max-width:240px; max-height:110px; width:100%; height:auto; object-fit:contain;" />
+        </div>
+        <div>
+          <p style="font-family:'Syne',sans-serif; font-size:1.25rem; font-weight:800; color:var(--cream); margin-bottom:0.4rem;">PPGAC — UEL</p>
+          <p style="font-family:'Space Mono',monospace; font-size:0.6rem; color:var(--mint); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:1rem;">Programa de Pós-Graduação em Análise do Comportamento — Universidade Estadual de Londrina</p>
+          <p style="font-family:'EB Garamond',serif; font-size:1rem; color:rgba(244,239,228,0.7); line-height:1.65;">
+            O PPGAC-UEL é o programa de pós-graduação que abriga o CRIACOM e dá continuidade à tradição de pesquisa em Análise do Comportamento da UEL — a mesma tradição que originou a Revista Torre de Babel em 1994. O programa é herdeiro direto do Departamento de Psicologia Geral e Análise do Comportamento que editou o periódico.
+          </p>
+        </div>
+        <div style="margin-top:auto;">
+          <a href="https://www.uel.br/pos/pgac/" target="_blank" rel="noopener"
+             style="display:inline-flex; align-items:center; gap:0.5rem;
+                    background:rgba(255,255,255,0.08); color:var(--cream);
+                    font-family:'Space Mono',monospace; font-size:0.68rem; font-weight:700;
+                    letter-spacing:0.1em; text-transform:uppercase;
+                    padding:0.75rem 1.4rem; border-radius:3px; text-decoration:none;
+                    border:1px solid var(--border);
+                    transition:background 0.2s, border-color 0.2s;">
+            uel.br/pos/pgac
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/><path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Citação recomendada -->
+    <div style="margin-top:3rem; border-top:1px solid var(--border); padding-top:2rem;">
+      <p style="font-family:'Space Mono',monospace; font-size:0.6rem; color:var(--mint); letter-spacing:0.18em; text-transform:uppercase; margin-bottom:0.75rem;">Citação recomendada</p>
+      <p style="font-family:'EB Garamond',serif; font-size:0.95rem; color:rgba(244,239,228,0.55); line-height:1.7; max-width:80ch;">
+        Torre de Babel: Reflexões e Pesquisa em Psicologia. Londrina: Departamento de Psicologia Geral e Análise do Comportamento, Universidade Estadual de Londrina. ISSN 1414-0551. 1994–1998. Digitalizado pelo CRIACOM/PPGAC-UEL. Disponível em: &lt;criacom.github.io&gt;. Acesso em: [data].
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="psi-logo">Ψ</div>
+      <p>Torre de Babel<br/>Arquivo Digital — Acesso Aberto</p>
+    </div>
+    <div class="footer-col">
+      <h4>Periódico Original</h4>
+      <ul>
+        <li>Torre de Babel: Refl.Pesq.Psic.</li>
+        <li>ISSN 1414-0551</li>
+        <li>Volumes 1–5 (1994–1998)</li>
+        <li>Editora UEL</li>
+        <li>Londrina, Paraná, Brasil</li>
+        <li>Depto. Psicologia Geral e</li>
+        <li>Análise do Comportamento — UEL</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Digitalização</h4>
+      <p style="margin-bottom:0.5rem;">Realizada pelo <a href="https://criacom.github.io/lab/" target="_blank" rel="noopener" style="color:var(--mint); text-decoration:none;">CRIACOM</a> — Grupo de Pesquisa em Criatividade, Inovação, Cognição e Comportamento, laboratório do <a href="https://www.uel.br/pos/pgac/" target="_blank" rel="noopener" style="color:var(--mint); text-decoration:none;">PPGAC-UEL</a>.</p>
+      <p>Projeto sem fins comerciais, com fins exclusivos de preservação histórica e científica do patrimônio da Análise do Comportamento brasileira.</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© Arquivo Digital Torre de Babel · <a href="https://criacom.github.io/lab/" target="_blank" rel="noopener">CRIACOM</a> / <a href="https://www.uel.br/pos/pgac/" target="_blank" rel="noopener">PPGAC-UEL</a> · Acesso Aberto · Sem fins comerciais</p>
+    <p>Conteúdo original: Departamento de Psicologia Geral e Análise do Comportamento — <a href="https://www.uel.br" target="_blank">UEL</a></p>
+  </div>
+</footer>
+
+<script>
+// ─── COVER GALLERY ───
+function switchVol(vol, card) {
+  const wasActive = card.classList.contains('active');
+
+  // Deactivate all cards and panels
+  document.querySelectorAll('.cover-card').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.volume-panel').forEach(p => {
+    p.classList.remove('active');
+    // Force re-trigger animation on next open
+    p.style.animation = 'none';
+  });
+
+  if (!wasActive) {
+    card.classList.add('active');
+    const panel = document.getElementById('vol-' + vol);
+    if (panel) {
+      panel.classList.add('active');
+      // Re-trigger animation
+      void panel.offsetWidth;
+      panel.style.animation = '';
+      // Smooth scroll to panel after a brief moment
+      setTimeout(() => {
+        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 80);
+    }
+  }
+
+  applySearch(document.getElementById('search-input').value);
+}
+
+// ─── SEARCH ───
+function applySearch(query) {
+  const q = query.trim().toLowerCase();
+  const countEl = document.getElementById('search-results-count');
+  const noResults = document.getElementById('no-results');
+  const termDisplay = document.getElementById('search-term-display');
+
+  if (!q) {
+    document.querySelectorAll('.article-item').forEach(el => {
+      el.classList.remove('hidden');
+      // Clear highlights
+      el.querySelectorAll('.article-title, .article-authors').forEach(t => {
+        t.innerHTML = t.textContent;
+      });
+    });
+    countEl.textContent = '';
+    noResults.classList.remove('visible');
+    return;
+  }
+
+  let total = 0;
+  document.querySelectorAll('.article-item').forEach(el => {
+    const searchable = (el.dataset.searchable || '').toLowerCase();
+    const match = searchable.includes(q);
+    el.classList.toggle('hidden', !match);
+    if (match) total++;
+  });
+
+  countEl.textContent = total > 0 ? total + ' resultado' + (total !== 1 ? 's' : '') : '';
+  termDisplay.textContent = query;
+  noResults.classList.toggle('visible', total === 0);
+}
+
+document.getElementById('search-input').addEventListener('input', function() {
+  applySearch(this.value);
+});
+
+// ─── SMOOTH ANCHOR ───
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+</script>
+</body>
+</html>
